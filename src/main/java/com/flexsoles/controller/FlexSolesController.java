@@ -16,7 +16,7 @@ public class FlexSolesController {
 	int id, descuento;
 	String titulo, descripcion;
 	double precio;
-	
+	int papa;
 	//GET METHODS	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String getIndex() {
