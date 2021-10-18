@@ -17,7 +17,7 @@ public class FlexSolesController {
 	String titulo, descripcion;
 	double precio;
 	
-	//GET METHODS	
+	//GET METHODS
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String getIndex() {
 		return "index";
@@ -47,15 +47,14 @@ public class FlexSolesController {
 	    descripcion = (String)session.getAttribute("descripcion");
 	    precio = (Double)session.getAttribute("precio");
 	    descuento = (int)session.getAttribute("descuento");
-	    
-	    
+	   
 	    return "crearProducto";
 	}
 	
 	
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
-	public String quiz(@RequestParam int id, String titulo,String descripcion, double precio, int descuento,HttpServletRequest request) {
+	public String CrearProducto(@RequestParam int id, String titulo,String descripcion, double precio, int descuento,HttpServletRequest request) {
 		request.getSession().setAttribute("id", id);
 		request.getSession().setAttribute("titulo", titulo);
 		request.getSession().setAttribute("descripcion", descripcion);
