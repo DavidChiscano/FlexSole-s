@@ -28,10 +28,10 @@ public class FlexSolesController {
 //	public String getIdProducto() {
 //		return "idProducto";
 //	}
-//	@RequestMapping(value = "/producto/crear", method = RequestMethod.GET)
-//	public String getCrearProducto() {
-//		return "crearProducto";
-//	}
+	@RequestMapping(value = "/producto/crear", method = RequestMethod.GET)
+	public String getCrear() {
+		return "/producto/crear";
+	}
 //	@RequestMapping(value = "/producto/buscar", method = RequestMethod.GET)
 //	public String getBuscarProducto() {
 //		return "buscarProducto";
@@ -41,29 +41,23 @@ public class FlexSolesController {
 //		return "borrarIdProducto";
 //	}
 	
-	//MAPPING
-//	@GetMapping("/producto/crear")
-//	public String process(Model model, HttpSession session, HttpServletRequest request) {
-//	    id = (int)session.getAttribute("id");
-//	    titulo = (String)session.getAttribute("titulo");
-//	    descripcion = (String)session.getAttribute("descripcion");
-//	    precio = (Double)session.getAttribute("precio");
-//	    descuento = (int)session.getAttribute("descuento");
-//	   
-//	    return "crearProducto";
-//	}
-	
 	
 	//POST METHODS
 
-//	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
-//	public String CrearProducto(@RequestParam int id, String titulo,String descripcion, double precio, int descuento,HttpServletRequest request) {
-//		request.getSession().setAttribute("id", id);
-//		request.getSession().setAttribute("titulo", titulo);
-//		request.getSession().setAttribute("descripcion", descripcion);
-//		request.getSession().setAttribute("precio", precio);
-//		request.getSession().setAttribute("descuento", descuento);
-//		
-//		return "redirect:/index";
-//	}
+	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
+	public String CrearProducto(@RequestParam String titulo,String descripcion, int id, double precio, int descuento,HttpServletRequest request, Model modelo) {
+		request.getSession().setAttribute("titulo", titulo);
+		request.getSession().setAttribute("descripcion", descripcion);
+		request.getSession().setAttribute("id", id);
+		request.getSession().setAttribute("precio", precio);
+		request.getSession().setAttribute("descuento", descuento);
+		
+		modelo.addAttribute("titulo_form",titulo);
+		modelo.addAttribute("descripcion_form", descripcion);
+		modelo.addAttribute("id_form", id);
+		modelo.addAttribute("precio_form", precio);
+		modelo.addAttribute("descuento_form", descuento);
+		
+		return "/producto/datosCrear";
+	}
 }
