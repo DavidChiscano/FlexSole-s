@@ -1,23 +1,36 @@
 package com.flexsoles.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.flexsoles.modelo.Producto;
+import com.flexsoles.persistencia.Productos;
+
 @Controller
 public class FlexSolesController {
+	//CONSTRUCTORES
+	private Productos producto;
+	
+	@Autowired
+	private Producto productoModelo;
 	
 	//VARIABLES PARA EL FORMULARIO CREAR PRODUCTO
 	
-	int id, descuento;
-	String titulo, descripcion;
+	int id;
+	int descuento;
+	String titulo;
+	String descripcion;
 	double precio;
+	
+	
 	
 	//GET METHODS	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -46,18 +59,17 @@ public class FlexSolesController {
 
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, int id, double precio, int descuento,HttpServletRequest request, Model modelo) {
-		request.getSession().setAttribute("titulo", titulo);
-		request.getSession().setAttribute("descripcion", descripcion);
-		request.getSession().setAttribute("id", id);
-		request.getSession().setAttribute("precio", precio);
-		request.getSession().setAttribute("descuento", descuento);
+		producto = new Productos(null, null, 0, 0, 0);
 		
-		modelo.addAttribute("titulo_form",titulo);
-		modelo.addAttribute("descripcion_form", descripcion);
-		modelo.addAttribute("id_form", id);
-		modelo.addAttribute("precio_form", precio);
-		modelo.addAttribute("descuento_form", descuento);
+		producto.setTitulo(titulo);
+		producto.setDescripcion(descripcion);
+		producto.setId(id);
+		producto.setPrecio(precio);
+		producto.setDescuento(descuento);
 		
-		return "/producto/datosCrear";
+		productoModelo.crearProducto(producto);
+		
+
+		return "/index";
 	}
 }
