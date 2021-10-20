@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "Productos")
-public class Producto {
+public class Productos {
 	
 	// ATRIBUTOS
 	@Column(name = "titulo")
@@ -14,6 +14,7 @@ public class Producto {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@Id
 	@Column(name = "id")
 	private int id;
 	
@@ -25,7 +26,7 @@ public class Producto {
 
 	
 	//CONSTRUCTOR
-	public Producto(String titulo, String descripcion, int id, double precio, int descuento) {
+	public Productos(String titulo, String descripcion, int id, double precio, int descuento) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.id = id;

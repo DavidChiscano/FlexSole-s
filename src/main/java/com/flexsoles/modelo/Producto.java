@@ -1,6 +1,5 @@
 package com.flexsoles.modelo;
-import com.flexsoles.persistencia.*;
-
+import com.flexsoles.persistencia.Productos;
 
 public interface Producto {
 	String setTitulo(Producto p);
