@@ -1,0 +1,24 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    img{
+        height: 260px;
+        width: 181px;
+        margin: 3%;
+    }
+    section{
+        display: flex;
+    }
+    aside{
+        display: flex;
+        flex-flow: row wrap;
+    }
+    article{
+        display: flex;
+        flex-flow: column wrap;
+    }
+    p{
+        margin-right: 40%;
+    }

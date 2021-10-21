@@ -3,7 +3,7 @@ import java.util.List;
 
 import com.flexsoles.persistencia.Productos;
 
-public interface Producto {
+public interface ProductoDAO {
 	String setTitulo(Productos p);
 	String setDescripcion(Productos p);
 	int setId(Productos p);
@@ -11,7 +11,7 @@ public interface Producto {
 	int setDescuento(Productos p);
 	
 	int crearProducto(Productos p);
-	public List<Productos> getProductos();
+	List<Productos> getProductos();
 
 }
 

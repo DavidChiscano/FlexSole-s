@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.flexsoles.persistencia.Productos;
 
 @Repository
-public class ProductoJDBC implements Producto {
+public class ProductoJDBC implements ProductoDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
