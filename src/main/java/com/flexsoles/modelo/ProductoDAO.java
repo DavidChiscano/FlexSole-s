@@ -11,6 +11,7 @@ public interface ProductoDAO {
 	int setDescuento(Productos p);
 	
 	int crearProducto(Productos p);
+	int borrarProducto(Productos p);
 	List<Productos> getProductos();
 
 }

@@ -52,27 +52,24 @@ public class FlexSolesController {
 //	public String getBuscarProducto() {
 //		return "buscarProducto";
 //	}
-//	@RequestMapping(value = "/producto/borrar/idProducto", method = RequestMethod.GET)
-//	public String getBorrarIdProducto() {
-//		return "borrarIdProducto";
-//	}
-	
-	
+
 	//POST METHODS
 
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, int id, double precio, int descuento,HttpServletRequest request, Model modelo) {
 		producto = new Productos(null, null, 0, 0, 0);
-		
 		producto.setTitulo(titulo);
 		producto.setDescripcion(descripcion);
 		producto.setId(id);
 		producto.setPrecio(precio);
 		producto.setDescuento(descuento);
-		
 		productoModelo.crearProducto(producto);
-		
-		
+		return "redirect:/index";
+	}
+	
+	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
+	public String getBorrarIdProducto(Model modelo, @PathVariable(value="id") String id) {
+		productoModelo.borrarProducto(producto);
 		return "/index";
 	}
 }

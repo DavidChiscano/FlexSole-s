@@ -56,4 +56,10 @@ public class ProductoJDBC implements ProductoDAO {
 				p.getTitulo(), p.getDescripcion(), p.getId(), p.getPrecio(), p.getDescuento());
 	}
 
+	@Override
+	public int borrarProducto(Productos p) {
+		String borrarQuery = "DELETE FROM Productos WHERE id= ? ";
+		return jdbcTemplate.update(borrarQuery, p.getId());
+	}
+
 }
