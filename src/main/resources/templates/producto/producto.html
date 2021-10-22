@@ -5,38 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nike Dunk Low Retro Premium</title>
-    <link rel="stylesheet" href="./css/estilos_productos_flexsole.css">
+    <link rel="stylesheet" href="/css/estilos_productos_flexsole.css">
 </head>
 <body>
     <header>
         <H1>FLEX SOLE'S</H1>
     </header>
     <section>
-        <aside>
-            <img src="./img/dunk_negras_1.jpg" alt="dunk_negras_1">
-            <img src="./img/dunk_negras_2.jpg" alt="dunk_negras_2">
-            <img src="./img/dunk_negras_3.jpg" alt="dunk_negras_3">
-            <img src="./img/dunk_negras_4.jpg" alt="dunk_negras_4">
-        </aside>
-            <article id="{id}" th:each="producto: ${ListaProductos}">
-            <a th:href="@{/producto/producto{id}(id=${'producto'+producto.id})}"><img th:src="@{/img/nike_dunk_first_article.jpg}" alt="imagen1"></a>
+            <article id="{id}" th:each="producto: ${ListaProductos[id-1]}">
+            <a th:href="@{/producto/producto{id}(id=${producto.id})}"><img th:src="@{/img/nike_dunk_first_article.jpg}" alt="imagen1"></a>
             <h3 th:text="${producto.titulo}"></h3>
             <h2 th:text="${producto.id}"></h2>
             <h2 th:text="${producto.descripcion}"></h2>
             <h2 th:text="${producto.precio}+'€'"></h2>
             <h2 th:text="${producto.descuento}+'%'"></h2>
-        </article>
-        
-        <!-->
-            <h3>Nike Dunk Low Retro Premium</h3>
-            <h2>119,99 €</h2>
-            <h2>10% descuento</h2>
-            <p>Las Nike Dunk Low son un básico esencial del zapatero. Este icónico modelo del baloncesto de mediados de los 80 regresa con una confección superduradera y los colores originales. Con acolchado en los tobillos y una tracción de goma, son fáciles de poner de golpe.</p>
-            <ul>
-                <li>Color mostrado: Blanco/Blanco/Negro</li>
-                <li>Modelo: CW1590-100</li>
-            </ul>
-         <!-->
         </article>
     </section>
 </body>
