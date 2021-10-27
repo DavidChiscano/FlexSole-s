@@ -1,6 +1,8 @@
 package com.flexsoles.modelo;
 
+import java.awt.print.Book;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -52,14 +54,26 @@ public class ProductoJDBC implements ProductoDAO {
 
 	@Override
 	public int crearProducto(Productos p) {
-		return jdbcTemplate.update("INSERT INTO Productos(titulo, descripcion, id, precio, descuento) values(?,?,?,?,?)",
-				p.getTitulo(), p.getDescripcion(), p.getId(), p.getPrecio(), p.getDescuento());
+		return jdbcTemplate.update("INSERT INTO Productos(titulo, descripcion, precio, descuento) values(?,?,?,?)",
+				p.getTitulo(), p.getDescripcion(), p.getPrecio(), p.getDescuento());
 	}
 
 	@Override
-	public int borrarProducto(Productos p) {
-		String borrarQuery = "DELETE FROM Productos WHERE id= ? ";
-		return jdbcTemplate.update(borrarQuery, p.getId());
+	public int borrarId(int id) {
+		return jdbcTemplate.update("delete from Productos where id = ?", id);
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public Optional<Productos> buscarId(int id) {
+		return jdbcTemplate.queryForObject("select * from Productos where id = ?", new Object[] { id }, (rs,
+				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"))));
+	}
+	@Override
+	public Optional<Productos> buscarNombre(String titulo) {
+		return jdbcTemplate.queryForObject("select * from Productos where titulo = ?", (rs,
+				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"))), new Object[] { titulo });
+	}
+
+	
 }

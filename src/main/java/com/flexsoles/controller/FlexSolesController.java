@@ -1,6 +1,8 @@
 package com.flexsoles.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,28 +41,29 @@ public class FlexSolesController {
 		return "index";
 	}
 	@RequestMapping(value = "/producto/producto{id}", method = RequestMethod.GET)
-	public String getIdProducto(Model modelo, @PathVariable(value="id") String id) {
-		List<Productos> ListaProductos = productoModelo.getProductos();
-		modelo.addAttribute("ListaProductos", ListaProductos);
+	public String getIdProducto(Model modelo, @PathVariable("id") int id) {
+		Optional<Productos> ListaProductos = productoModelo.buscarId(id);
+		Productos p1 = ListaProductos.get();
+		modelo.addAttribute("ListaProductos", p1);
 		return "/producto/producto";
 	}
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.GET)
 	public String getCrear() {
 		return "/producto/crear";
 	}
-//	@RequestMapping(value = "/producto/buscar", method = RequestMethod.GET)
-//	public String getBuscarProducto() {
-//		return "buscarProducto";
-//	}
+	@RequestMapping(value = "/producto/buscar", method = RequestMethod.GET)
+	public String getBuscarProducto(Model modelo,@RequestParam String busqueda) {
+		Optional<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
+		modelo.addAttribute("ListaProductos", this.toList(ListaProductos));
+		return "/producto/producto";
+	}
 
 	//POST METHODS
-
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
-	public String CrearProducto(@RequestParam String titulo,String descripcion, int id, double precio, int descuento,HttpServletRequest request, Model modelo) {
+	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
 		producto = new Productos(null, null, 0, 0, 0);
 		producto.setTitulo(titulo);
 		producto.setDescripcion(descripcion);
-		producto.setId(id);
 		producto.setPrecio(precio);
 		producto.setDescuento(descuento);
 		productoModelo.crearProducto(producto);
@@ -68,8 +71,16 @@ public class FlexSolesController {
 	}
 	
 	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
-	public String getBorrarIdProducto(Model modelo, @PathVariable(value="id") String id) {
-		productoModelo.borrarProducto(producto);
-		return "/index";
+	public String getBorrarIdProducto(@PathVariable("id") int id){
+		productoModelo.borrarId(id);
+		return "redirect:/index";
 	}
+	
+	public static <T> List<T> toList(Optional<T> opt) {
+	    return opt
+	            .map(Collections::singletonList)
+	            .orElseGet(Collections::emptyList);
+	}
+	
+	
 }

@@ -25,13 +25,21 @@ public class Productos {
 	private int descuento;
 
 	
-	//CONSTRUCTOR
+	//CONSTRUCTORES
 	public Productos(String titulo, String descripcion, int id, double precio, int descuento) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.id = id;
 		this.precio = precio;
 		this.descuento = descuento;
+	}
+	
+	public Productos() {}
+
+	public Productos(int id, String titulo, double precio) {
+		this.id = id;
+		this.titulo = titulo;
+		this.precio = precio;
 	}
 
 	public String getTitulo() {

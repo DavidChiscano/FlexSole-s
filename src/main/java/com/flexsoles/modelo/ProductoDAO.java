@@ -1,5 +1,6 @@
 package com.flexsoles.modelo;
 import java.util.List;
+import java.util.Optional;
 
 import com.flexsoles.persistencia.Productos;
 
@@ -9,11 +10,14 @@ public interface ProductoDAO {
 	int setId(Productos p);
 	double setPrecio(Productos p);
 	int setDescuento(Productos p);
-	
 	int crearProducto(Productos p);
-	int borrarProducto(Productos p);
-	List<Productos> getProductos();
+	int borrarId(int id);
 
+	List<Productos> getProductos();
+	
+	Optional<Productos> buscarId(int id);
+	
+	Optional<Productos> buscarNombre(String titulo);
 }
 
 
