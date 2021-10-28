@@ -5,20 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/estilos_flexsole.css">
+    <link rel="stylesheet" href="/css/bootstrap.css.css">
     <title>FLEX SOLE'S</title>
 </head>
 <body>
     <header>
         <h1>FLEX SOLE'S</h1>
     </header>
-    <nav>
-    	<a th:href="@{/producto/crear}"><button>Insertar Producto</button></a>
-    	
-    	<form th:object="${titulo}" th:action="@{/producto/buscar}" method="GET">
-    		<input type="text" id="{titulo}" th:value="${titulo}" name="busqueda">
-    		<input type="submit" value="Buscar">
-    	</form>
-    </nav>
+    
+    
+    
+    
+    <nav th:replace="navbar"></nav>
     <section>
         <article id="{id}" th:each="producto: ${ListaProductos}">
             <a th:href="@{/producto/{id}(id=${'producto'+producto.id})}"><img th:src="@{/img/nike_dunk_first_article.jpg}" alt="imagen1"></a>

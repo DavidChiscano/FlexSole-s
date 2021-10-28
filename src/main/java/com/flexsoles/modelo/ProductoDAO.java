@@ -17,7 +17,8 @@ public interface ProductoDAO {
 	
 	Optional<Productos> buscarId(int id);
 	
-	Optional<Productos> buscarNombre(String titulo);
+	List<Productos> buscarNombre(String titulo);
+	
 }
 
 

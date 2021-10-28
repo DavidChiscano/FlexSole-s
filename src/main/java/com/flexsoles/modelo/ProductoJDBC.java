@@ -1,6 +1,5 @@
 package com.flexsoles.modelo;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,9 +69,9 @@ public class ProductoJDBC implements ProductoDAO {
 				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"))));
 	}
 	@Override
-	public Optional<Productos> buscarNombre(String titulo) {
-		return jdbcTemplate.queryForObject("select * from Productos where titulo = ?", (rs,
-				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"))), new Object[] { titulo });
+	public List<Productos> buscarNombre(String titulo) {
+		return jdbcTemplate.query("select * from Productos where titulo like ?", (rs,
+				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio")), titulo );
 	}
 
 	

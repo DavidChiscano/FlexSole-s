@@ -53,8 +53,9 @@ public class FlexSolesController {
 	}
 	@RequestMapping(value = "/producto/buscar", method = RequestMethod.GET)
 	public String getBuscarProducto(Model modelo,@RequestParam String busqueda) {
-		Optional<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
-		modelo.addAttribute("ListaProductos", this.toList(ListaProductos));
+
+List<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
+		modelo.addAttribute("ListaProductos", (ListaProductos));
 		return "/producto/producto";
 	}
 
@@ -76,6 +77,7 @@ public class FlexSolesController {
 		return "redirect:/index";
 	}
 	
+	//CONVERTIR OPTIONAL A LIST
 	public static <T> List<T> toList(Optional<T> opt) {
 	    return opt
 	            .map(Collections::singletonList)
