@@ -1,3 +1,14 @@
+.imagen{
+	display: flex;
+	justify-content: center;
+}
+.imagen img{
+	width: 70% ;
+	height: auto;
+}
+	nav{
+		width: 100%;
+	}
 	header{
 		text-align: center;
 	}

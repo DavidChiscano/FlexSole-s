@@ -71,7 +71,7 @@ public class ProductoJDBC implements ProductoDAO {
 	@Override
 	public List<Productos> buscarNombre(String titulo) {
 		return jdbcTemplate.query("select * from Productos where titulo like ?", (rs,
-				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getString("descripcion")), titulo );
+				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion")), titulo );
 	}
 
 	
