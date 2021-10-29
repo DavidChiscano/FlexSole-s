@@ -10,6 +10,7 @@ body{
     }
     section{
         display: flex;
+        margin: 1%;
     }
     aside{
         display: flex;
@@ -17,8 +18,11 @@ body{
     }
     article{
         display: flex;
-        flex-flow: column wrap;
+        flex-flow: row wrap;
     }
     p{
         margin-right: 40%;
     }
+.info{
+	margin-top: 5%;
+}

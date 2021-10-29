@@ -66,12 +66,12 @@ public class ProductoJDBC implements ProductoDAO {
 	@Override
 	public Optional<Productos> buscarId(int id) {
 		return jdbcTemplate.queryForObject("select * from Productos where id = ?", new Object[] { id }, (rs,
-				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"))));
+				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getString("descripcion"))));
 	}
 	@Override
 	public List<Productos> buscarNombre(String titulo) {
 		return jdbcTemplate.query("select * from Productos where titulo like ?", (rs,
-				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio")), titulo );
+				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getString("descripcion")), titulo );
 	}
 
 	
