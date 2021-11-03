@@ -14,24 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.flexsoles.modelo.ProductoDAO;
+import com.flexsoles.modelo.UsuarioDAO;
 import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
 @Controller
 public class ProductController {
-	//CONSTRUCTORES
-	private Productos producto;
-	private Usuario usuario;
+
 	@Autowired
 	private ProductoDAO productoModelo;
-	
-	//VARIABLES PARA EL FORMULARIO CREAR PRODUCTO
-	
-	int id;
-	int descuento;
-	String titulo;
-	String descripcion;
-	double precio;
+	@Autowired
+	private UsuarioDAO usuarioModelo;
+
 
 	//GET METHODS	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -59,14 +53,19 @@ public class ProductController {
 		return "/producto/producto";
 	}
 	
-	@RequestMapping(value = "/usuario/registro", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario/login", method = RequestMethod.GET)
+	public String getLogin(Model modelo) {
+		return "/usuario/login";
+	}
+	@RequestMapping(value = "/usuario/signup", method = RequestMethod.GET)
 	public String getRegistro(Model modelo) {
-		return "/usuario/registro";
+		return "/usuario/signup";
 	}
 
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
+		Productos producto = new Productos();
 		producto = new Productos(null, null, 0, 0, 0);
 		producto.setTitulo(titulo);
 		producto.setDescripcion(descripcion);
@@ -79,6 +78,31 @@ public class ProductController {
 	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
 	public String getBorrarIdProducto(@PathVariable("id") int id){
 		productoModelo.borrarId(id);
+		return "redirect:/index";
+	}
+	
+	@RequestMapping(value = "/usuario/signup", method = RequestMethod.POST)
+	public String CrearUsuario(@RequestParam String nombre,String apellidos, String email, String passwd, String fechaNacimiento, HttpServletRequest request, Model modelo) {
+		
+		Usuario usuario= new Usuario();
+		usuario = new Usuario(null, null, null, null, null);
+		usuario.setNombre(nombre);
+		usuario.setApellidos(apellidos);
+		usuario.setEmail(email);
+		usuario.setPasswd(passwd);
+		usuario.setFecha(fechaNacimiento);
+		usuarioModelo.crearUsuario(usuario);
+
+		return "redirect:/usuario/login";
+	}
+	
+	@RequestMapping(value = "/usuario/login", method = RequestMethod.POST)
+	public String iniciarSesion(Model modelo, @RequestParam String nombre, String passwd) {
+		Usuario usuario = new Usuario();
+		usuario.setNombre(nombre);
+		usuario.setPasswd(passwd);
+		usuarioModelo.iniciarSesion(usuario.getNombre(), usuario.getPasswd());
+		
 		return "redirect:/index";
 	}
 	

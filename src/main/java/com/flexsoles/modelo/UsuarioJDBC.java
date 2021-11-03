@@ -40,7 +40,7 @@ public class UsuarioJDBC implements UsuarioDAO {
 	}
 
 	@Override
-	public Date setFecha(Usuario u) {
+	public String setFecha(Usuario u) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -48,13 +48,19 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public List<Usuario> getUsuarios() {
 		return jdbcTemplate.query("select * from Usuarios",
-				(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getDate("fechaNacimiento")));
+				(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")));
 	}
 
 	@Override
 	public int crearUsuario(Usuario u) {
 		return jdbcTemplate.update("INSERT INTO Usuarios(nombre, apellidos, email, passwd, fechaNacimiento) values(?,?,?,?,?)",
 				u.getNombre(), u.getApellidos(), u.getEmail(), u.getPasswd(), u.getFecha());
+	}
+
+	@Override
+	public List<Usuario> iniciarSesion(String nombre, String passwd) {
+		return jdbcTemplate.query("select * from Usuario where nombre like ? AND passwd like ?", (rs,
+				rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("passwd")), nombre, passwd);
 	}
 
 }

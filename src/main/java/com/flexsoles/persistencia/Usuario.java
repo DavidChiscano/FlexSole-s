@@ -24,12 +24,12 @@ public class Usuario {
 		private String passwd;
 		
 		@Column(name = "fechaNacimiento")
-		private Date fecha;
+		private String fecha;
 
 		//CONSTRUCTORES
 		public Usuario(){}
 		
-		public Usuario(String nombre, String apellidos, String email, String passwd, Date fecha ) {
+		public Usuario(String nombre, String apellidos, String email, String passwd, String fecha ) {
 			this.nombre = nombre;
 			this.apellidos = apellidos;
 			this.email = email;
@@ -37,6 +37,10 @@ public class Usuario {
 			this.fecha = fecha;
 		}
 		
+		public Usuario(String nombre, String passwd) {
+			this.nombre = nombre;
+			this.passwd = passwd;
+		}
 		//GETTERS & SETTERS
 		public String getNombre() {
 			return nombre;
@@ -70,11 +74,11 @@ public class Usuario {
 			this.passwd = passwd;
 		}
 
-		public Date getFecha() {
+		public String getFecha() {
 			return fecha;
 		}
 
-		public void setFecha(Date fecha) {
+		public void setFecha(String fecha) {
 			this.fecha = fecha;
 		}
 
