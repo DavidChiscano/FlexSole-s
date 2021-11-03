@@ -1,6 +1,5 @@
 package com.flexsoles.controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.flexsoles.modelo.ProductoDAO;
 import com.flexsoles.persistencia.Productos;
+import com.flexsoles.persistencia.Usuario;
 
 @Controller
 public class FlexSolesController {
 	//CONSTRUCTORES
 	private Productos producto;
-	
+	private Usuario usuario;
 	@Autowired
 	private ProductoDAO productoModelo;
 	
@@ -54,9 +54,14 @@ public class FlexSolesController {
 	@RequestMapping(value = "/producto/buscar", method = RequestMethod.GET)
 	public String getBuscarProducto(Model modelo,@RequestParam String busqueda) {
 
-List<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
+		List<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
 		modelo.addAttribute("ListaProductos", (ListaProductos));
 		return "/producto/producto";
+	}
+	
+	@RequestMapping(value = "/usuario/registro", method = RequestMethod.GET)
+	public String getRegistro(Model modelo) {
+		return "/usuario/registro";
 	}
 
 	//POST METHODS
@@ -76,13 +81,5 @@ List<Productos> ListaProductos = productoModelo.buscarNombre(busqueda);
 		productoModelo.borrarId(id);
 		return "redirect:/index";
 	}
-	
-	//CONVERTIR OPTIONAL A LIST
-	public static <T> List<T> toList(Optional<T> opt) {
-	    return opt
-	            .map(Collections::singletonList)
-	            .orElseGet(Collections::emptyList);
-	}
-	
 	
 }
