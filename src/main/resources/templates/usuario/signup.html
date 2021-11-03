@@ -7,20 +7,22 @@
     <link rel="stylesheet" href="/css/estilos_productos_flexsole.css">
     <link rel="stylesheet" href="/css/estilo_form.css">
     <link rel="stylesheet" href="/css/bootstrap.css.css">
-    <title>CREATE PRODUCT</title>
+    <title>SIGN UP</title>
 </head>
 <body>
-    <form th:action="@{/producto/crear}" method="POST">
+    <form th:action="@{/usuario/signup}" method="POST">
         <div>
-            <p>Titulo: <input type="text" name="titulo"></p>
+            <p>Nombre: <input type="text" name="nombre"></p>
             <br>
-            <p>Descripcion: <input type="text" name="descripcion"></p>
+            <p>Apellidos: <input type="text" name="apellidos"></p>
             <br>
-            <p>Precio: <input type="text" name="precio"></p>
+            <p>Email: <input type="text" name="email"></p>
             <br>
-            <p>Descuento: <input type="text" name="descuento"></p>
+            <p>Contraseña: <input type="text" name="contraseña"></p>
+            <br>
+            <p>Fecha de Nacimiento: <input type="date" name="fecha"></p>
         </div>
-        <input type="submit" value="Enviar">
+        <input type="submit" value="registrarse">
     </form>
 </body>
 </html>

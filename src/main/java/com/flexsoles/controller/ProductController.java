@@ -18,7 +18,7 @@ import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
 @Controller
-public class FlexSolesController {
+public class ProductController {
 	//CONSTRUCTORES
 	private Productos producto;
 	private Usuario usuario;
