@@ -18,7 +18,7 @@ import com.flexsoles.modelo.ProductoDAO;
 import com.flexsoles.persistencia.Productos;
 
 @Controller
-public class FlexSolesController {
+public class ProductController {
 	//CONSTRUCTORES
 	private Productos producto;
 	
