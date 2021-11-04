@@ -82,12 +82,10 @@ public class Usuario {
 			this.fecha = fecha;
 		}
 
-		@Override
-		public String toString() {
-			return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", passwd=" + passwd
-					+ ", fecha=" + fecha + "]";
+		@Override 
+		public String toString(){
+			return this.nombre + " " + this.apellidos;	
 		}
-
 
 }
 
