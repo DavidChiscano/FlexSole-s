@@ -1,6 +1,6 @@
 package com.flexsoles.persistencia;
 
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,6 +80,12 @@ public class Usuario {
 
 		public void setFecha(String fecha) {
 			this.fecha = fecha;
+		}
+
+		@Override
+		public String toString() {
+			return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", passwd=" + passwd
+					+ ", fecha=" + fecha + "]";
 		}
 
 

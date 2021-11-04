@@ -1,13 +1,11 @@
 package com.flexsoles.modelo;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
 @Repository
@@ -58,9 +56,9 @@ public class UsuarioJDBC implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> iniciarSesion(String nombre, String passwd) {
-		return jdbcTemplate.query("select * from Usuario where nombre like ? AND passwd like ?", (rs,
-				rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("passwd")), nombre, passwd);
+	public Usuario iniciarSesion(String nombre, String passwd) {
+		return jdbcTemplate.queryForObject("select * from Usuarios where nombre like ? AND passwd like ?", (rs,
+				rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("passwd"), rs.getString("email"), rs.getString("apellidos"), rs.getString("fechaNacimiento")), nombre, passwd);
 	}
 
 }
