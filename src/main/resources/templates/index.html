@@ -14,8 +14,9 @@
         <h1>FLEX SOLE'S</h1>
     </header>
     <nav th:replace="navbar"></nav>
-    
+        Bienvenido: <p th:text="${session.usuario}"></p>
     <div id="contenedor">
+ 
 		<div class="card mb-3" id="{id}" th:each="producto: ${ListaProductos}">
 			<div class="cajas">
 			  <h3 class="card-header" th:text="${producto.titulo}"></h3>

@@ -58,9 +58,9 @@ public class UsuarioJDBC implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> iniciarSesion(String nombre, String passwd) {
-		return jdbcTemplate.query("select * from Usuario where nombre like ? AND passwd like ?", (rs,
-				rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("passwd")), nombre, passwd);
+	public Usuario iniciarSesion(String nombre, String passwd) {
+		return  jdbcTemplate.queryForObject("select * from Usuarios where nombre like ? AND passwd like ?", (rs,
+				rowNum) -> new Usuario(rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), nombre, passwd);
 	}
 
 }

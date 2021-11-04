@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,11 +98,11 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/usuario/login", method = RequestMethod.POST)
-	public String iniciarSesion(Model modelo, @RequestParam String nombre, String passwd) {
-		Usuario usuario = new Usuario();
-		usuario.setNombre(nombre);
-		usuario.setPasswd(passwd);
-		usuarioModelo.iniciarSesion(usuario.getNombre(), usuario.getPasswd());
+	public String iniciarSesion(Model modelo, @RequestParam String nombre,@RequestParam String passwd, HttpSession httpSession) {
+		Usuario usuario = usuarioModelo.iniciarSesion(nombre, passwd);
+		
+		httpSession.setAttribute("usuario", usuario.toString());
+		//th:text="${session.user['tel']}"
 		
 		return "redirect:/index";
 	}

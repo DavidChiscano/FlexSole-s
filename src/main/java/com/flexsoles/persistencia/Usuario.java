@@ -82,7 +82,10 @@ public class Usuario {
 			this.fecha = fecha;
 		}
 
-
+		@Override 
+		public String toString(){
+			return this.nombre + " " + this.apellidos;	
+		}
 }
 
 

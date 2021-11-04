@@ -11,6 +11,8 @@ public interface UsuarioDAO {
 	String setPasswd(Usuario u);
 	String setFecha(Usuario u);
 	int crearUsuario(Usuario u);
-	List<Usuario> iniciarSesion(String nombre, String passwd);
+	
+	Usuario iniciarSesion(String nombre, String passwd);
+	
 	List <Usuario> getUsuarios();
 }
