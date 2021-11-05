@@ -1,15 +1,16 @@
 package com.flexsoles.persistencia;
-
-
-
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "Usuarios")
-public class Usuario {
+public class Usuario implements Serializable {
 		
 		// ATRIBUTOS
+		@Column(name = "id")
+		private long id;
+	
 		@Column(name = "nombre")
 		private String nombre;
 		
@@ -19,17 +20,19 @@ public class Usuario {
 		@Id
 		@Column(name = "email")
 		private String email;
-		
+
 		@Column(name = "passwd")
 		private String passwd;
 		
 		@Column(name = "fechaNacimiento")
 		private String fecha;
 
+
 		//CONSTRUCTORES
 		public Usuario(){}
 		
-		public Usuario(String nombre, String apellidos, String email, String passwd, String fecha ) {
+		public Usuario(long id, String nombre, String apellidos, String email, String passwd, String fecha ) {
+			this.id = id;
 			this.nombre = nombre;
 			this.apellidos = apellidos;
 			this.email = email;
@@ -42,6 +45,14 @@ public class Usuario {
 			this.passwd = passwd;
 		}
 		//GETTERS & SETTERS
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+		
 		public String getNombre() {
 			return nombre;
 		}

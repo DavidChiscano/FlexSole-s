@@ -1,11 +1,13 @@
 package com.flexsoles.persistencia;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "Productos")
-public class Productos {
+public class Productos implements Serializable {
 	
 	// ATRIBUTOS
 	@Column(name = "titulo")
