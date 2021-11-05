@@ -53,7 +53,7 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public int crearUsuario(Usuario u) {
 		return jdbcTemplate.update("INSERT INTO Usuarios(nombre, apellidos, email, passwd, fechaNacimiento) values(?,?,?,?,?)",
-				u.getNombre(), u.getApellidos(), u.getEmail(), u.getPasswd(), u.getFecha());
+				u.getNombre(), u.getApellidos(), u.getEmail(), u.getPasswd(), u.getFechaNacimiento());
 	}
 
 	@Override
