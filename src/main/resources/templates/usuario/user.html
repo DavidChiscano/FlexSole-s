@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/bootstrap_formulario.css.css}" rel="stylesheet" />
+	<style>
+		body{
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h3>Nombre:</h3>
+    <p th:text=${usuario.nombre}></p>
+    <h3>Primer Apellido:</h3>
+    <p th:text=${usuario.apellidos}></p>
+    <h3>Email:</h3>
+    <p th:text=${usuario.email}></p>
+    <h3>Dia de Nacimiento:</h3>
+    <p th:text=${usuario.fechaNacimiento}></p>
+</body>
+</html>
