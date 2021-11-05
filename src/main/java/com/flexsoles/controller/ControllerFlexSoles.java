@@ -22,7 +22,7 @@ import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
 @Controller
-public class ProductController {
+public class ControllerFlexSoles {
 
 	@Autowired
 	private ProductoDAO productoModelo;
