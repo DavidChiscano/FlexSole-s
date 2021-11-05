@@ -8,13 +8,17 @@
 	</style>
 </head>
 <body>
+<article id="{id}" th:each="usuario: ${ListaUsuarios}"> 
+	<h3>ID:</h3>
+    <p th:text=${usuario.id}></p>
 	<h3>Nombre:</h3>
     <p th:text=${usuario.nombre}></p>
-    <h3>Primer Apellido:</h3>
+    <h3>Apellidos:</h3>
     <p th:text=${usuario.apellidos}></p>
     <h3>Email:</h3>
     <p th:text=${usuario.email}></p>
     <h3>Dia de Nacimiento:</h3>
     <p th:text=${usuario.fechaNacimiento}></p>
+</article>
 </body>
 </html>

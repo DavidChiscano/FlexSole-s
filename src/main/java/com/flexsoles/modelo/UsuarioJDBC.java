@@ -64,9 +64,9 @@ public class UsuarioJDBC implements UsuarioDAO {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public Optional<Usuario> buscarId(int id) {
+	public Optional<Usuario> buscarId(long id) {
 		return jdbcTemplate.queryForObject("select * from Usuarios where id = ?", new Object[] { id }, (rs,
-				rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento"))));	
+				rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("fechaNacimiento"))));	
 		}
 
 }

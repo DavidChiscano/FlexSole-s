@@ -39,7 +39,13 @@ public class Usuario implements Serializable {
 			this.passwd = passwd;
 			this.fecha = fecha;
 		}
-		
+		public Usuario(long id, String nombre, String apellidos, String email, String fecha ) {
+			this.id = id;
+			this.nombre = nombre;
+			this.apellidos = apellidos;
+			this.email = email;
+			this.fecha = fecha;
+		}
 		public Usuario(String nombre, String passwd) {
 			this.nombre = nombre;
 			this.passwd = passwd;

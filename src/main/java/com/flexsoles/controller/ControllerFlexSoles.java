@@ -66,12 +66,13 @@ public class ControllerFlexSoles {
 	}
 	
 	@RequestMapping(value = "/usuario/user{id}", method = RequestMethod.GET)
-	public String getPerfil(Model modelo, @PathVariable("id") int id) {
+	public String getPerfil(Model modelo, @PathVariable("id") long id) {
 		Optional<Usuario> ListaUsuarios = usuarioModelo.buscarId(id);
 		Usuario u = ListaUsuarios.get();
 		modelo.addAttribute("ListaUsuarios", u);
 		return "/usuario/user";
-	}
+	}	
+	
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
