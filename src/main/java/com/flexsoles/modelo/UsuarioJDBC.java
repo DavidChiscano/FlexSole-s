@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
 @Repository
@@ -67,6 +66,7 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public Optional<Usuario> buscarId(int id) {
 		return jdbcTemplate.queryForObject("select * from Usuarios where id = ?", new Object[] { id }, (rs,
-				rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento"))));	}
+				rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento"))));	
+		}
 
 }

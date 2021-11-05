@@ -1,8 +1,10 @@
 package com.flexsoles.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -105,12 +107,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/usuario/login", method = RequestMethod.POST)
-	public String iniciarSesion(Model modelo, @RequestParam String nombre,@RequestParam String passwd, HttpSession httpSession) {
+	public String iniciarSesion(Model modelo, @RequestParam String nombre, @RequestParam String passwd, HttpSession httpSession ) {
 		Usuario usuario = usuarioModelo.iniciarSesion(nombre, passwd);
-		
 		httpSession.setAttribute("usuario", usuario.toString());
-		//th:text="${session.user}"
-		
 		return "redirect:/index";
 	}
 	
