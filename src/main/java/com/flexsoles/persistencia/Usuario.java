@@ -25,19 +25,26 @@ public class Usuario implements Serializable {
 		private String passwd;
 		
 		@Column(name = "fechaNacimiento")
-		private String fecha;
+		private String fechaNacimiento;
 
 
 		//CONSTRUCTORES
 		public Usuario(){}
 		
-		public Usuario(long id, String nombre, String apellidos, String email, String passwd, String fecha ) {
+		public Usuario(long id, String nombre, String apellidos, String email, String passwd, String fechaNacimiento ) {
 			this.id = id;
 			this.nombre = nombre;
 			this.apellidos = apellidos;
 			this.email = email;
 			this.passwd = passwd;
-			this.fecha = fecha;
+			this.fechaNacimiento = fechaNacimiento;
+		}
+		public Usuario(long id, String nombre, String apellidos, String email, String fechaNacimiento ) {
+			this.id = id;
+			this.nombre = nombre;
+			this.apellidos = apellidos;
+			this.email = email;
+			this.fechaNacimiento = fechaNacimiento;
 		}
 		
 		public Usuario(String nombre, String passwd) {
@@ -85,12 +92,13 @@ public class Usuario implements Serializable {
 			this.passwd = passwd;
 		}
 
-		public String getFecha() {
-			return fecha;
+
+		public String getFechaNacimiento() {
+			return fechaNacimiento;
 		}
 
-		public void setFecha(String fecha) {
-			this.fecha = fecha;
+		public void setFechaNacimiento(String fechaNacimiento) {
+			this.fechaNacimiento = fechaNacimiento;
 		}
 
 		@Override 

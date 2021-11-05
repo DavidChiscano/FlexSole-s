@@ -13,6 +13,6 @@ public interface UsuarioDAO {
 	String setFecha(Usuario u);
 	int crearUsuario(Usuario u);
 	Usuario iniciarSesion(String nombre, String passwd);
-	Optional<Usuario> buscarId(int id);
+	Optional<Usuario> buscarId(long id);
 	List <Usuario> getUsuarios();
 }

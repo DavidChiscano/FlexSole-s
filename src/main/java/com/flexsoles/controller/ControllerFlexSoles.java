@@ -66,7 +66,7 @@ public class ControllerFlexSoles {
 	}
 	
 	@RequestMapping(value = "/usuario/user{id}", method = RequestMethod.GET)
-	public String getPerfil(Model modelo, @PathVariable("id") int id) {
+	public String getPerfil(Model modelo, @PathVariable("id") long id) {
 		Optional<Usuario> ListaUsuarios = usuarioModelo.buscarId(id);
 		Usuario u = ListaUsuarios.get();
 		modelo.addAttribute("ListaUsuarios", u);
