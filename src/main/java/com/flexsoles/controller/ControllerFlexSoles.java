@@ -65,12 +65,12 @@ public class ControllerFlexSoles {
 		return "/usuario/signup";
 	}
 	
-	@RequestMapping(value = "/usuario/perfil{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario/user{id}", method = RequestMethod.GET)
 	public String getPerfil(Model modelo, @PathVariable("id") int id) {
 		Optional<Usuario> ListaUsuarios = usuarioModelo.buscarId(id);
 		Usuario u = ListaUsuarios.get();
 		modelo.addAttribute("ListaUsuarios", u);
-		return "/usuario/perfil";
+		return "/usuario/user";
 	}
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
