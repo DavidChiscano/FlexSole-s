@@ -1,7 +1,7 @@
 package com.flexsoles.modelo;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,7 +48,7 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public List<Usuario> getUsuarios() {
 		return jdbcTemplate.query("select * from Usuarios",
-				(rs, rowNum) -> new Usuario(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")));
+				(rs, rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")));
 	}
 
 	@Override
@@ -60,7 +60,13 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public Usuario iniciarSesion(String nombre, String passwd) {
 		return  jdbcTemplate.queryForObject("select * from Usuarios where nombre like ? AND passwd like ?", (rs,
-				rowNum) -> new Usuario(rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), nombre, passwd);
+				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), nombre, passwd);
 	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public Optional<Usuario> buscarId(int id) {
+		return jdbcTemplate.queryForObject("select * from Usuarios where id = ?", new Object[] { id }, (rs,
+				rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento"))));	}
 
 }

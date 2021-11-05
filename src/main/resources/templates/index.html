@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="/css/bootstrap.css.css">
-    	<link rel="stylesheet" href="/css/estilos_flexsole.css">
+    <link rel="stylesheet" href="/css/estilos_flexsole.css">
     <title>FLEX SOLE'S</title>
 </head>
 <body>
@@ -14,9 +13,7 @@
         <h1>FLEX SOLE'S</h1>
     </header>
     <nav th:replace="navbar"></nav>
-        Bienvenido: <p th:text="${session.usuario}"></p>
     <div id="contenedor">
- 
 		<div class="card mb-3" id="{id}" th:each="producto: ${ListaProductos}">
 			<div class="cajas">
 			  <h3 class="card-header" th:text="${producto.titulo}"></h3>
@@ -34,13 +31,5 @@
 			</div>
 		</div>
     </div>
-<!--<section>
-        <article id="{id}" th:each="producto: ${ListaProductos}">
-            <a th:href="@{/producto/{id}(id=${'producto'+producto.id})}"><img th:src="@{/img/nike_dunk_first_article.jpg}" alt="imagen1"></a>
-            <h3 th:text="${producto.titulo}"></h3>
-            <h2 th:text="${producto.precio}+'€'"></h2>
-            <h2 th:text="${producto.descuento}+'%'"></h2>
-        </article>
-    </section>-->
 </body>
 </html>

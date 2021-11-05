@@ -62,7 +62,14 @@ public class ProductController {
 	public String getRegistro(Model modelo) {
 		return "/usuario/signup";
 	}
-
+	
+	@RequestMapping(value = "/usuario/perfil{id}", method = RequestMethod.GET)
+	public String getPerfil(Model modelo, @PathVariable("id") int id) {
+		Optional<Usuario> ListaUsuarios = usuarioModelo.buscarId(id);
+		Usuario u = ListaUsuarios.get();
+		modelo.addAttribute("ListaUsuarios", u);
+		return "/usuario/perfil";
+	}
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
@@ -86,7 +93,7 @@ public class ProductController {
 	public String CrearUsuario(@RequestParam String nombre,String apellidos, String email, String passwd, String fechaNacimiento, HttpServletRequest request, Model modelo) {
 		
 		Usuario usuario= new Usuario();
-		usuario = new Usuario(null, null, null, null, null);
+		usuario = new Usuario(0, null, null, null, null, null);
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
 		usuario.setEmail(email);
@@ -102,7 +109,7 @@ public class ProductController {
 		Usuario usuario = usuarioModelo.iniciarSesion(nombre, passwd);
 		
 		httpSession.setAttribute("usuario", usuario.toString());
-		//th:text="${session.user['tel']}"
+		//th:text="${session.user}"
 		
 		return "redirect:/index";
 	}
