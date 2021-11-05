@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="/css/estilos_flexsole.css">
     <link rel="stylesheet" href="/css/bootstrap.css.css">
-    	<link rel="stylesheet" href="/css/estilos_flexsole.css">
     <title>FLEX SOLE'S</title>
 </head>
 <body>
     <header>
+   		<img th:src="@{/img/zapatos1.png}" alt="caja2">
         <h1>FLEX SOLE'S</h1>
+        <img th:src="@{/img/zapatos.png}" alt="caja2">
     </header>
     <nav th:replace="navbar"></nav>
-    
+     
     <div id="contenedor">
+ 
 		<div class="card mb-3" id="{id}" th:each="producto: ${ListaProductos}">
 			<div class="cajas">
 			  <h3 class="card-header" th:text="${producto.titulo}"></h3>
