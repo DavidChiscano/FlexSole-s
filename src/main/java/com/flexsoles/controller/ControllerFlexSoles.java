@@ -33,7 +33,7 @@ public class ControllerFlexSoles {
 	//GET METHODS	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String getIndex(Model modelo) {
-		List<Productos> ListaProductos = productoModelo.getProductos();
+		List<Productos> ListaProductos = productoModelo.get8Productos();
 		modelo.addAttribute("ListaProductos", ListaProductos);
 		return "index";
 	}
@@ -64,7 +64,7 @@ public class ControllerFlexSoles {
 	public String getRegistro(Model modelo) {
 		return "/usuario/signup";
 	}
-	
+
 	@RequestMapping(value = "/usuario/user{id}", method = RequestMethod.GET)
 	public String getPerfil(Model modelo, @PathVariable("id") long id) {
 		Optional<Usuario> ListaUsuarios = usuarioModelo.buscarId(id);
@@ -72,7 +72,7 @@ public class ControllerFlexSoles {
 		modelo.addAttribute("ListaUsuarios", u);
 		return "/usuario/user";
 	}	
-	
+
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
 	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
@@ -101,7 +101,7 @@ public class ControllerFlexSoles {
 		usuario.setApellidos(apellidos);
 		usuario.setEmail(email);
 		usuario.setPasswd(passwd);
-		usuario.setFecha(fechaNacimiento);
+		usuario.setFechaNacimiento(fechaNacimiento);
 		usuarioModelo.crearUsuario(usuario);
 
 		return "redirect:/usuario/login";
@@ -110,7 +110,7 @@ public class ControllerFlexSoles {
 	@RequestMapping(value = "/usuario/login", method = RequestMethod.POST)
 	public String iniciarSesion(Model modelo, @RequestParam String nombre, @RequestParam String passwd, HttpSession httpSession ) {
 		Usuario usuario = usuarioModelo.iniciarSesion(nombre, passwd);
-		httpSession.setAttribute("usuario", usuario.toString());
+		httpSession.setAttribute("usuario", usuario);
 		return "redirect:/index";
 	}
 	

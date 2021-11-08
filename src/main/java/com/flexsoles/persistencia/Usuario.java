@@ -30,7 +30,7 @@ public class Usuario implements Serializable {
 
 		//CONSTRUCTORES
 		public Usuario(){}
-		
+	
 		public Usuario(long id, String nombre, String apellidos, String email, String passwd, String fechaNacimiento ) {
 			this.id = id;
 			this.nombre = nombre;
@@ -45,13 +45,6 @@ public class Usuario implements Serializable {
 			this.apellidos = apellidos;
 			this.email = email;
 			this.fechaNacimiento = fechaNacimiento;
-		}
-		public Usuario(long id, String nombre, String apellidos, String email, String fecha ) {
-			this.id = id;
-			this.nombre = nombre;
-			this.apellidos = apellidos;
-			this.email = email;
-			this.fecha = fecha;
 		}
 		public Usuario(String nombre, String passwd) {
 			this.nombre = nombre;

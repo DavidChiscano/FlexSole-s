@@ -12,7 +12,7 @@ public interface ProductoDAO {
 	int crearProducto(Productos p);
 	int borrarId(int id);
 
-	List<Productos> getProductos();
+	List<Productos> get8Productos();
 	
 	Optional<Productos> buscarId(int id);
 	
