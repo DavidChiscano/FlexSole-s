@@ -10,6 +10,12 @@
     <title>CREATE PRODUCT</title>
 </head>
 <body>
+    <header>
+        <h1>FLEX SOLE'S</h1>
+    </header>
+    <nav th:replace="navbar"></nav>
+
+    <div id="contenedor">
     <form th:action="@{/producto/crear}" method="POST">
         <div>
             <p>Titulo: <input type="text" name="titulo"></p>

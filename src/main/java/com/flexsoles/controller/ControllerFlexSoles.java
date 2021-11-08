@@ -100,7 +100,7 @@ public class ControllerFlexSoles {
 		usuario.setApellidos(apellidos);
 		usuario.setEmail(email);
 		usuario.setPasswd(passwd);
-		usuario.setFecha(fechaNacimiento);
+		usuario.setFechaNacimiento(fechaNacimiento);
 		usuarioModelo.crearUsuario(usuario);
 
 		return "redirect:/usuario/login";

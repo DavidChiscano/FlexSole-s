@@ -19,8 +19,13 @@
         <h1>FLEX SOLE'S</h1>
         <img th:src="@{/img/zapatos.png}" alt="caja2">
     </header>
-    <nav th:replace="navbar"></nav>
-
+    <nav>
+    	  <a class="navbar-brand" th:href="@{/usuario/{id}(id=${'usuario'+usuario.id})}">
+		    	<img style="width:50px; height:50px; margin-left: 50px" th:src="@{/img/icon_user.jpg}" alt="user_icon">
+		    	<h6 style="display:flex; flex-flow:column wrap; color:white"th:text="${session.usuario}"></h6>
+		  </a>
+    </nav>
+	<nav th:replace="navbar"></nav>
     <div id="contenedor">
 		<div class="card mb-3" id="{id}" th:each="producto: ${ListaProductos}">
 			<div class="cajas">
