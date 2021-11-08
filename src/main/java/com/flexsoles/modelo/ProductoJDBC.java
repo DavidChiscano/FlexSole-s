@@ -46,8 +46,8 @@ public class ProductoJDBC implements ProductoDAO {
 	}
 
 	@Override
-	public List<Productos> getProductos() {
-		return jdbcTemplate.query("select * from Productos",
+	public List<Productos> get8Productos() {
+		return jdbcTemplate.query("select * from Productos LIMIT 8",
 				(rs, rowNum) -> new Productos(rs.getString("titulo"), rs.getString("descripcion"), rs.getInt("id"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
@@ -71,7 +71,7 @@ public class ProductoJDBC implements ProductoDAO {
 	@Override
 	public List<Productos> buscarNombre(String titulo) {
 		return jdbcTemplate.query("select * from Productos where titulo like ?", (rs,
-				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion")), titulo );
+				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion")), "%"+titulo+"%" );
 	}
 
 	
