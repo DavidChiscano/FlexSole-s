@@ -81,7 +81,7 @@ public class ControllerFlexSoles {
 
 	//POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
-	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento,HttpServletRequest request, Model modelo) {
+	public String CrearProducto(@RequestParam String titulo,String descripcion, double precio, int descuento, Model modelo) {
 		Productos producto = new Productos();
 		producto = new Productos(null, null, 0, 0, 0);
 		producto.setTitulo(titulo);
@@ -117,5 +117,6 @@ public class ControllerFlexSoles {
 		session.setAttribute("usuario", usuario);
 		return "redirect:/index";
 	}
+
 	
 }

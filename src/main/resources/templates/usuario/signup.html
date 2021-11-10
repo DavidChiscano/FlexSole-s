@@ -10,6 +10,12 @@
     <title>SIGN UP</title>
 </head>
 <body>
+    <header>
+        <h1>FLEX SOLE'S</h1>
+    </header>
+    <nav th:replace="navbar"></nav>
+
+    <div id="contenedor">
     <form th:action="@{/usuario/signup}" method="POST">
         <div>
             <p>Nombre: <input type="text" name="nombre"></p>

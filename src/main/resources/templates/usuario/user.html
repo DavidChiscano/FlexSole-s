@@ -8,6 +8,12 @@
 	</style>
 </head>
 <body>
+    <header>
+        <h1>FLEX SOLE'S</h1>
+    </header>
+    <nav th:replace="navbar"></nav>
+
+    <div id="contenedor">
 <article id="{id}" th:each="usuario: ${ListaUsuarios}">
 	<h3>Nombre:</h3>
     <p th:text=${usuario.nombre}></p>

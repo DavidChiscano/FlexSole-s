@@ -19,8 +19,7 @@
         <h1>FLEX SOLE'S</h1>
         <img th:src="@{/img/zapatos.png}" alt="caja2">
     </header>
-    <nav th:replace="navbar"></nav>
-
+	<nav th:replace="navbar"></nav>
     <div id="contenedor">
 		<div class="card mb-3" id="{id}" th:each="producto: ${ListaProductos}">
 			<div class="cajas">
