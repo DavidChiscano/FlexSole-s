@@ -108,9 +108,14 @@ public class ControllerFlexSoles {
 	}
 	
 	@RequestMapping(value = "/usuario/login", method = RequestMethod.POST)
-	public String iniciarSesion(Model modelo, @RequestParam String nombre, @RequestParam String passwd, HttpSession httpSession ) {
+	public String iniciarSesion(Model modelo, @RequestParam String nombre, @RequestParam String passwd, HttpSession session ) {
 		Usuario usuario = usuarioModelo.iniciarSesion(nombre, passwd);
-		httpSession.setAttribute("usuario", usuario);
+		session.setAttribute("usuario", usuario);
+		return "redirect:/index";
+	}
+	@RequestMapping(value = "/usuario/logout", method = RequestMethod.GET)
+	public String cerrarSession(HttpSession session ) {
+		session.invalidate();
 		return "redirect:/index";
 	}
 	
