@@ -4,6 +4,8 @@
   <div class="container-fluid">
   		<div th:if="${session.usuario != null}" th:href="@{/usuario/user{id}(id=${session.usuario.id})}">
 		  <a class="navbar-brand">
+		    		<div th:if="${session.usuario != null}" th:href="@{/usuario/user{id}(id=${session.usuario.id})}">
+		    		</div>
 		    	<img style="width:50px; height:50px; margin-left: 50px" th:src="@{/img/icon_user.jpg}" alt="user_icon">
 		    	<h6 style="display:flex; flex-flow:column wrap; color:white" th:text="${session.usuario.nombre}+' '+${session.usuario.apellidos}"></h6>
 		  </a>
@@ -37,6 +39,8 @@
           <a class="nav-link" th:href="@{/usuario/logout}">LOG OUT</a>
         </li>
       </ul>
+      
+
     </div>
      <form class="d-flex" th:object="${titulo}" th:action="@{/producto/buscar}" method="GET">
         <input type="text" class="class="form-control me-sm-2" "id="{titulo}" th:value="${titulo}" name="busqueda">

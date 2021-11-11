@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.flexsoles.modelo.ComprasDAO;
 import com.flexsoles.modelo.ProductoDAO;
 import com.flexsoles.modelo.UsuarioDAO;
+import com.flexsoles.persistencia.Compras;
 import com.flexsoles.persistencia.Productos;
 import com.flexsoles.persistencia.Usuario;
 
@@ -27,11 +29,12 @@ public class ControllerFlexSoles {
 	private ProductoDAO productoModelo;
 	@Autowired
 	private UsuarioDAO usuarioModelo;
-
+	@Autowired
+	private ComprasDAO comprasModelo;
 
 	//GET METHODS	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String getIndex(Model modelo ,HttpSession httpSession) {
+	public String getIndex(Model modelo) {
 		List<Productos> ListaProductos = productoModelo.get8Productos();
 		modelo.addAttribute("ListaProductos", ListaProductos);
 		return "index";
@@ -43,6 +46,13 @@ public class ControllerFlexSoles {
 		modelo.addAttribute("ListaProductos", p1);
 		return "/producto/producto";
 	}
+	
+	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
+	public String getBorrarIdProducto(@PathVariable("id") int id){
+		productoModelo.borrarId(id);
+		return "redirect:/index";
+	}
+	
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.GET)
 	public String getCrear() {
 		return "/producto/crear";
@@ -77,6 +87,13 @@ public class ControllerFlexSoles {
 		modelo.addAttribute("ListaUsuarios", u);
 		return "/usuario/user";
 	}	
+	
+	@RequestMapping(value = "/compra/cesta", method = RequestMethod.GET)
+	public String getCesta(Model modelo) {
+		List<Compras> ListaCompras = comprasModelo.getCesta();
+		modelo.addAttribute("ListaCompras", (ListaCompras));
+		return "/compra/cesta";
+	}
 
 
 	//POST METHODS
@@ -91,12 +108,7 @@ public class ControllerFlexSoles {
 		productoModelo.crearProducto(producto);
 		return "redirect:/index";
 	}
-	
-	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
-	public String getBorrarIdProducto(@PathVariable("id") int id){
-		productoModelo.borrarId(id);
-		return "redirect:/index";
-	}
+
 	
 	@RequestMapping(value = "/usuario/signup", method = RequestMethod.POST)
 	public String CrearUsuario(@RequestParam String nombre,String apellidos, String email, String passwd, String fechaNacimiento, HttpServletRequest request, Model modelo) {
@@ -117,6 +129,15 @@ public class ControllerFlexSoles {
 		session.setAttribute("usuario", usuario);
 		return "redirect:/index";
 	}
+	@RequestMapping(value = "/compra/cesta", method = RequestMethod.POST)
+	public String CrearCompra(@RequestParam long id, @RequestParam String nombre, @RequestParam int cantidad, HttpSession session) {
+		Compras compra = new Compras();
+		compra = new Compras(0,null,0);
+		compra.setId(id);
+		compra.setNombre(nombre);
+		compra.setCantidad(cantidad);
+		comprasModelo.crearCompra(compra);
+		return "redirect:/index";
+	}
 
-	
 }

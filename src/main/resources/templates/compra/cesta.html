@@ -1,14 +1,18 @@
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/estilos_flexsole.css">
+    <link rel="stylesheet" href="/css/bootstrap.css.css">
 
-
+    <title>FLEX SOLE'S</title>
 </head>
 <body>
-
+<nav th:replace="navbar"></nav>
 <h1>Shopping Cart</h1>
 
 <div class="shopping-cart">
-
   <div class="column-labels">
     <label class="product-image">Image</label>
     <label class="product-details">Product</label>
@@ -17,6 +21,18 @@
     <label class="product-removal">Remove</label>
     <label class="product-line-price">Total</label>
   </div>
+ 
+  <article id="{id}" name="{titulo}" th:each="producto: ${ListaCompras}">
+        	<aside>
+	        	 <img th:src="@{/img/dunk_negras_1.jpg}" alt="dunk_negras_1">
+	    	</aside>
+	    	<div class="info">
+		            <h3 th:text="${producto.id}"></h3>
+		            <h3 th:text="${producto.nombre}"></h3>
+		            <h3 th:text="${producto.cantidad}"></h3>
+	    	</div>
+    </article>
+
 
   <div class="product">
     <div class="product-image">
@@ -76,9 +92,7 @@
       <div class="totals-value" id="cart-total">90.57</div>
     </div>
   </div>
-      
       <button class="checkout">Checkout</button>
-
 </div>
 </body>
 </html>
