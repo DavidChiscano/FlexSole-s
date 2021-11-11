@@ -24,13 +24,15 @@
 	    	</aside>
 	    	<div class="info">
 	    		   	<h2 th:text="${producto.titulo}"></h2>
-		            <h3 th:text="${producto.id}"></h3>
 		            <h3 th:text="${producto.precio}+'€'"></h3>
 		            <h3 th:text="${producto.descuento}+'%'"></h3>
 		            <p th:text="${producto.descripcion}"></p>
 		            
 		            <a th:href="@{/producto/borrar/{id}(id=${producto.id})}"><button>BORRAR</button></a>
 	    	</div>
+       </article>
+       <article>
+		            <a th:href="@{/compra/cesta}"><button>añadir a la cesta</button></a>
        </article>
     </section>
 </body>

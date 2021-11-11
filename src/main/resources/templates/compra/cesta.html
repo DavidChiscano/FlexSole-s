@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,10 +24,21 @@
   </div>
  
   <article id="{id}" name="{titulo}" th:each="producto: ${ListaCompras}">
+=======
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
+	<head>
+  		<link rel="stylesheet" href="/css/cesta.css">
+  		<script src="/js/cesta.js"></script>
+	</head>
+	<body>
+	   <article id="{id}" name="{titulo}" th:each="compras: ${ListaCompras}">
+>>>>>>> 8c6fd0538e0c001cae862a852d20467df64cc417
         	<aside>
 	        	 <img th:src="@{/img/dunk_negras_1.jpg}" alt="dunk_negras_1">
 	    	</aside>
 	    	<div class="info">
+<<<<<<< HEAD
 		            <h3 th:text="${producto.id}"></h3>
 		            <h3 th:text="${producto.nombre}"></h3>
 		            <h3 th:text="${producto.cantidad}"></h3>
@@ -95,4 +107,12 @@
       <button class="checkout">Checkout</button>
 </div>
 </body>
+=======
+	    		   	<h2 th:text="${compras.id}"></h2>
+		            <h3 th:text="${compras.nombre}"></h3>
+		            <h3 th:text="${compras.cantidad}"></h3>
+	    	</div>
+       </article>
+	</body>
+>>>>>>> 8c6fd0538e0c001cae862a852d20467df64cc417
 </html>
