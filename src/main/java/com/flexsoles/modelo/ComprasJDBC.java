@@ -1,15 +1,18 @@
 package com.flexsoles.modelo;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Component;
 
 import com.flexsoles.persistencia.Compras;
 @Component 
 public class ComprasJDBC implements ComprasDAO {
-	@Autowired
-	private ComprasDAO moduloCompras;
 	
 	@Override
 	public long setId(Compras c) {
@@ -30,9 +33,14 @@ public class ComprasJDBC implements ComprasDAO {
 	}
 
 	@Override
-	public List<Compras> getCesta() {
-		// TODO Auto-generated method stub
-		return moduloCompras.getCesta();
+	public List<Compras> getCesta() {  
+        ArrayList<Compras> compra = new ArrayList<Compras>();
+		Compras cesta = new Compras();
+        cesta.setId(0);
+		cesta.setNombre("2");
+		cesta.setCantidad(0);
+		compra.add(cesta);
+		return compra;
 	}
 
 	@Override

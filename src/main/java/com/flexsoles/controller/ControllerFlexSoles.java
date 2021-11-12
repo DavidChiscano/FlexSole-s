@@ -1,5 +1,6 @@
 package com.flexsoles.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,12 @@ public class ControllerFlexSoles {
 	private ComprasDAO comprasModelo;
 
 	//GET METHODS	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getIndex2(Model modelo) {
+		List<Productos> ListaProductos = productoModelo.get8Productos();
+		modelo.addAttribute("ListaProductos", ListaProductos);
+		return "index";
+	}
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String getIndex(Model modelo) {
 		List<Productos> ListaProductos = productoModelo.get8Productos();
@@ -88,11 +95,42 @@ public class ControllerFlexSoles {
 		return "/usuario/user";
 	}	
 	
-	@RequestMapping(value = "/compra/cesta", method = RequestMethod.GET)
-	public String getCesta(Model modelo) {
-		List<Compras> ListaCompras = comprasModelo.getCesta();
-		modelo.addAttribute("ListaCompras", (ListaCompras));
-		return "/compra/cesta";
+	@RequestMapping(value = "/compra/cesta", method = RequestMethod.POST)
+	public String getCesta(Model modelo, HttpSession session, @RequestParam int id, @RequestParam String nombre,@RequestParam int cantidad) {
+		Compras compra = new Compras();
+		compra.setId(id);
+		compra.setNombre(nombre);
+		compra.setCantidad(cantidad);
+
+		List<Compras> carrito = (List<Compras>) session.getAttribute("carrito");
+		
+		//Carrito vacio
+		if (carrito == null) {
+			carrito = new ArrayList<Compras>();
+			carrito.add(compra);
+		}else{
+			//en casos de que el haya carrito
+			for (Compras c : carrito) {
+				if (c.getId() == compra.getId()) {
+					//en caso de que el producto ya este en el carrito
+					c.setCantidad(c.getCantidad()+cantidad);
+				}
+			}
+			//en caso de que el producto no este en el carrito
+			for (Compras c : carrito) {
+				if(c.getId() != compra.getId()) {
+					carrito.add(compra);
+				}
+			}
+		}
+		//guardar cambios en la session
+		session.setAttribute("id", carrito.get(0));
+		session.setAttribute("nombre", carrito.get(1));
+		session.setAttribute("cantidad", carrito.get(2));
+		
+		modelo.addAttribute("ListaCompras", carrito);
+
+		return "redirect:/compra/cesta";
 	}
 
 
@@ -129,6 +167,8 @@ public class ControllerFlexSoles {
 		session.setAttribute("usuario", usuario);
 		return "redirect:/index";
 	}
+	
+	/*
 	@RequestMapping(value = "/compra/cesta", method = RequestMethod.POST)
 	public String CrearCompra(@RequestParam long id, @RequestParam String nombre, @RequestParam int cantidad, HttpSession session) {
 		Compras compra = new Compras();
@@ -137,7 +177,7 @@ public class ControllerFlexSoles {
 		compra.setNombre(nombre);
 		compra.setCantidad(cantidad);
 		comprasModelo.crearCompra(compra);
-		return "redirect:/index";
+		return "redirect:/compra/cesta";
 	}
-
+*/
 }
