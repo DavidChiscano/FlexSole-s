@@ -34,12 +34,14 @@ public class ComprasJDBC implements ComprasDAO {
 
 	@Override
 	public List<Compras> getCesta() {  
-        ArrayList<Compras> compra = new ArrayList<Compras>();
+        
+		ArrayList<Compras> compra = new ArrayList<Compras>();
 		Compras cesta = new Compras();
         cesta.setId(0);
 		cesta.setNombre("2");
 		cesta.setCantidad(0);
 		compra.add(cesta);
+		
 		return compra;
 	}
 

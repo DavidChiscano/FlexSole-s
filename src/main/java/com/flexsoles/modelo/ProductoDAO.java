@@ -6,15 +6,15 @@ import com.flexsoles.persistencia.Productos;
 public interface ProductoDAO {
 	String setTitulo(Productos p);
 	String setDescripcion(Productos p);
-	int setId(Productos p);
+	long setId(Productos p);
 	double setPrecio(Productos p);
 	int setDescuento(Productos p);
 	int crearProducto(Productos p);
-	int borrarId(int id);
+	long borrarId(long id);
 
 	List<Productos> get8Productos();
 	
-	Optional<Productos> buscarId(int id);
+	Optional<Productos> buscarId(long id);
 	
 	List<Productos> buscarNombre(String titulo);
 	

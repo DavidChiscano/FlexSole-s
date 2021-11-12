@@ -47,7 +47,7 @@ public class ControllerFlexSoles {
 		return "index";
 	}
 	@RequestMapping(value = "/producto/producto{id}", method = RequestMethod.GET)
-	public String getIdProducto(Model modelo, @PathVariable("id") int id) {
+	public String getIdProducto(Model modelo, @PathVariable("id") long id) {
 		Optional<Productos> ListaProductos = productoModelo.buscarId(id);
 		Productos p1 = ListaProductos.get();
 		modelo.addAttribute("ListaProductos", p1);
@@ -55,7 +55,7 @@ public class ControllerFlexSoles {
 	}
 	
 	@RequestMapping(value = "/producto/borrar/{id}", method = RequestMethod.GET)
-	public String getBorrarIdProducto(@PathVariable("id") int id){
+	public String getBorrarIdProducto(@PathVariable("id") long id){
 		productoModelo.borrarId(id);
 		return "redirect:/index";
 	}
@@ -95,8 +95,20 @@ public class ControllerFlexSoles {
 		return "/usuario/user";
 	}	
 	
+	@RequestMapping(value = "/compra/cesta", method = RequestMethod.GET)
+	public String getCesta(Model modelo,HttpSession session) {
+		
+		List<Compras> carrito = (List<Compras>) session.getAttribute("carrito");
+
+		
+		modelo.addAttribute("ListaCompras", carrito);
+
+		
+		return "/compra/cesta";
+	}
+	
 	@RequestMapping(value = "/compra/cesta", method = RequestMethod.POST)
-	public String getCesta(Model modelo, HttpSession session, @RequestParam int id, @RequestParam String nombre,@RequestParam int cantidad) {
+	public String getCesta(Model modelo, HttpSession session, @RequestParam long id, @RequestParam String nombre,@RequestParam int cantidad) {
 		Compras compra = new Compras();
 		compra.setId(id);
 		compra.setNombre(nombre);
@@ -124,10 +136,10 @@ public class ControllerFlexSoles {
 			}
 		}
 		//guardar cambios en la session
-		session.setAttribute("id", carrito.get(0));
-		session.setAttribute("nombre", carrito.get(1));
-		session.setAttribute("cantidad", carrito.get(2));
-		
+		session.setAttribute("id", id);
+		session.setAttribute("nombre", nombre);
+		session.setAttribute("cantidad", cantidad);
+		session.setAttribute("carrito",carrito);
 		modelo.addAttribute("ListaCompras", carrito);
 
 		return "redirect:/compra/cesta";

@@ -18,7 +18,7 @@ public class Productos implements Serializable {
 	
 	@Id
 	@Column(name = "id")
-	private int id;
+	private long id;
 	
 	@Column(name = "precio")
 	private double precio;
@@ -28,7 +28,7 @@ public class Productos implements Serializable {
 
 	
 	//CONSTRUCTORES
-	public Productos(String titulo, String descripcion, int id, double precio, int descuento) {
+	public Productos(String titulo, String descripcion, long id, double precio, int descuento) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.id = id;
@@ -38,12 +38,12 @@ public class Productos implements Serializable {
 	
 	public Productos() {}
 
-	public Productos(int id, String titulo, double precio) {
+	public Productos(long id, String titulo, double precio) {
 		this.id = id;
 		this.titulo = titulo;
 		this.precio = precio;
 	}
-	public Productos(int id, String titulo, double precio, int descuento, String descripcion) {
+	public Productos(long id, String titulo, double precio, int descuento, String descripcion) {
 		this.id = id;
 		this.titulo = titulo;
 		this.precio = precio;
@@ -51,7 +51,7 @@ public class Productos implements Serializable {
 		this.descripcion = descripcion;
 	}
 	
-	public Productos(int id, String titulo, double precio, String descripcion) {
+	public Productos(long id, String titulo, double precio, String descripcion) {
 		this.id = id;
 		this.titulo = titulo;
 		this.precio = precio;
@@ -75,11 +75,11 @@ public class Productos implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

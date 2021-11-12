@@ -28,7 +28,7 @@ public class ProductoJDBC implements ProductoDAO {
 	}
 
 	@Override
-	public int setId(Productos p) {
+	public long setId(Productos p) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -48,7 +48,7 @@ public class ProductoJDBC implements ProductoDAO {
 	@Override
 	public List<Productos> get8Productos() {
 		return jdbcTemplate.query("select * from Productos LIMIT 8",
-				(rs, rowNum) -> new Productos(rs.getString("titulo"), rs.getString("descripcion"), rs.getInt("id"), rs.getDouble("precio"), rs.getInt("descuento")));
+				(rs, rowNum) -> new Productos(rs.getString("titulo"), rs.getString("descripcion"), rs.getLong("id"), rs.getDouble("precio"), rs.getInt("descuento")));
 	}
 
 	@Override
@@ -58,20 +58,20 @@ public class ProductoJDBC implements ProductoDAO {
 	}
 
 	@Override
-	public int borrarId(int id) {
+	public long borrarId(long id) {
 		return jdbcTemplate.update("delete from Productos where id = ?", id);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public Optional<Productos> buscarId(int id) {
+	public Optional<Productos> buscarId(long id) {
 		return jdbcTemplate.queryForObject("select * from Productos where id = ?", new Object[] { id }, (rs,
-				rowNum) -> Optional.of(new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion"))));
+				rowNum) -> Optional.of(new Productos(rs.getLong("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion"))));
 	}
 	@Override
 	public List<Productos> buscarNombre(String titulo) {
 		return jdbcTemplate.query("select * from Productos where titulo like ?", (rs,
-				rowNum) -> new Productos(rs.getInt("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion")), "%"+titulo+"%" );
+				rowNum) -> new Productos(rs.getLong("id"), rs.getString("titulo"), rs.getDouble("precio"), rs.getInt("descuento"), rs.getString("descripcion")), "%"+titulo+"%" );
 	}
 
 	
