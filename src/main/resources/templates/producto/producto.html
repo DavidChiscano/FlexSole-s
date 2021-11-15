@@ -8,7 +8,6 @@
 	<title>Nike Dunk Low Retro Premium</title>
 	<link rel="stylesheet" href="/css/estilos_productos_flexsole.css">
 	<link rel="stylesheet" href="/css/bootstrap.css.css">
-
 </head>
 
 <body>
@@ -18,6 +17,7 @@
 	<nav th:replace="navbar"></nav>
 
 	<form th:action="@{/compra/cesta}" method="POST">
+
 		<section>
 			<article id="{id}" name="{titulo}" th:each="producto: ${ListaProductos}">
 				<aside>
@@ -33,8 +33,6 @@
 					<h3 th:text="${producto.descuento}+'%'"></h3>
 					<p th:text="${producto.descripcion}"></p>
 
-					<a th:href="@{/producto/borrar/{id}(id=${producto.id})}"><button>BORRAR</button></a>
-
 					<input type="hidden" id="id" name="id" th:value="${producto.id}">
 					<input type="hidden" id="nombre" name="nombre" th:value="${producto.titulo}">
 					<input type="number" id="cantidad" name="cantidad" value="" min="1" max="100">
@@ -44,6 +42,8 @@
 			</article>
 		</section>
 	</form>
-
+		<article id="{id}" name="{titulo}" th:each="producto: ${ListaProductos}">
+			<a th:href="@{/producto/borrar/{id}(id=${producto.id})}"><button>Borrar Producto</button></a>
+		</article>
 </body>
 </html>

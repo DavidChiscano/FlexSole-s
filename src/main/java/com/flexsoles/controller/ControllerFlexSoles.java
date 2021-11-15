@@ -97,13 +97,8 @@ public class ControllerFlexSoles {
 	
 	@RequestMapping(value = "/compra/cesta", method = RequestMethod.GET)
 	public String getCesta(Model modelo,HttpSession session) {
-		
 		List<Compras> carrito = (List<Compras>) session.getAttribute("carrito");
-
-		
 		modelo.addAttribute("ListaCompras", carrito);
-
-		
 		return "/compra/cesta";
 	}
 	
@@ -120,19 +115,21 @@ public class ControllerFlexSoles {
 		if (carrito == null) {
 			carrito = new ArrayList<Compras>();
 			carrito.add(compra);
+			
 		}else{
-			//en casos de que el haya carrito
+			//en casos de que haya carrito
+			Boolean added = false;
+			
 			for (Compras c : carrito) {
 				if (c.getId() == compra.getId()) {
 					//en caso de que el producto ya este en el carrito
+					added = true;
 					c.setCantidad(c.getCantidad()+cantidad);
 				}
 			}
 			//en caso de que el producto no este en el carrito
-			for (Compras c : carrito) {
-				if(c.getId() != compra.getId()) {
-					carrito.add(compra);
-				}
+			if(added == false) {
+				carrito.add(compra);
 			}
 		}
 		//guardar cambios en la session
@@ -141,7 +138,6 @@ public class ControllerFlexSoles {
 		session.setAttribute("cantidad", cantidad);
 		session.setAttribute("carrito",carrito);
 		modelo.addAttribute("ListaCompras", carrito);
-
 		return "redirect:/compra/cesta";
 	}
 
