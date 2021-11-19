@@ -30,7 +30,7 @@ public class ComprasJDBC implements ComprasDAO {
 	
 	@Override
 	public List<Compras> getCompras(Long idUsuario) {
-		return jdbcTemplate.query("select * from Compras WHERE idUsuario=",
+		return jdbcTemplate.query("select * from Compras WHERE idUsuario=?",
 				(rs, rowNum) -> new Compras(rs.getLong("id"), rs.getLong("idUsuario"),rs.getLong("idProducto"), rs.getInt("unidades")),idUsuario);
 	}
 

@@ -207,6 +207,9 @@ public class ControllerFlexSoles {
 		Usuario user = (Usuario) session.getAttribute("usuario");
 		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
 		Compras c = comprasServicio.realizarCompra(user, carrito);
+		c.setIdUsuario(user.getId());
+		c.setIdProducto(carrito.get(0).getIdProducto());
+		c.setCantidad(carrito.get(0).getCantidad());
 		comprasModelo.insertarCompra(c);
 		if (c==null)
 			return "redirect:/index";

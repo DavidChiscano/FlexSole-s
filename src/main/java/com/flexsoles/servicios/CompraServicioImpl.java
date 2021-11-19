@@ -29,7 +29,9 @@ public class CompraServicioImpl implements ComprasServicio{
 		int resultado = 0;
 		Productos p = productoModelo.buscarId(listaCarrito.get(0).getIdProducto()).orElse(null);
 		Compras compra = new Compras();
-		
+		compra.setIdUsuario(u.getId());
+		compra.setIdProducto(p.getId());
+		compra.setCantidad(listaCarrito.get(0).getCantidad());
 		if (p != null) {
 			resultado = comprasModelo.insertarCompra(compra);
 		}
