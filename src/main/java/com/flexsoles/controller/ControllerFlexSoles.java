@@ -195,13 +195,10 @@ public class ControllerFlexSoles {
 		return "redirect:/compra/cesta";
 	}
 	
-	
-	
 	@RequestMapping(value = "/compra/realizarCompra", method = RequestMethod.GET)
-	public String getRealizarCompra(HttpSession session, Model modelo) {
-		Usuario user = (Usuario) session.getAttribute("usuario");
-		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
-		modelo.addAttribute("Compras",carrito);
+	public String getComprasRealizadasGet(Model modelo) {
+		List<Compras> ListaComprasRealizadas = comprasServicio.getCompras();
+		modelo.addAttribute("ListaComprasRealizadas", ListaComprasRealizadas);
 		return "/compra/miscompras";
 	}
 	
@@ -213,7 +210,6 @@ public class ControllerFlexSoles {
 		comprasModelo.insertarCompra(c);
 		if (c==null)
 			return "redirect:/index";
-		
 		return "redirect:/compra/miscompras";
 	}
 }

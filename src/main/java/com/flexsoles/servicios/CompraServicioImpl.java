@@ -21,7 +21,6 @@ public class CompraServicioImpl implements ComprasServicio{
 	@Autowired
 	private ComprasDAO comprasModelo;
 	
-	
 	@Autowired
 	private ProductoDAO productoModelo;
 	
@@ -41,9 +40,7 @@ public class CompraServicioImpl implements ComprasServicio{
 		}else {
 			return compra;
 		}
-		
 
-		
 	}
 
 	@Override
