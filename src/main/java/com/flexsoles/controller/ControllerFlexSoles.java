@@ -201,12 +201,7 @@ public class ControllerFlexSoles {
 	public String getRealizarCompra(HttpSession session, Model modelo) {
 		Usuario user = (Usuario) session.getAttribute("usuario");
 		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
-		Compras c = comprasServicio.realizarCompra(user, carrito);
-		comprasModelo.insertarCompra(c);
-		if (c==null)
-			return "redirect:/index";
-		
-		modelo.addAttribute("Compras",c);
+		modelo.addAttribute("Compras",carrito);
 		return "/compra/miscompras";
 	}
 	
@@ -215,12 +210,10 @@ public class ControllerFlexSoles {
 		Usuario user = (Usuario) session.getAttribute("usuario");
 		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
 		Compras c = comprasServicio.realizarCompra(user, carrito);
-
+		comprasModelo.insertarCompra(c);
 		if (c==null)
 			return "redirect:/index";
 		
-		modelo.addAttribute("Compras",c);
-		comprasModelo.insertarCompra(c);
-		return "/compra/miscompras";
+		return "redirect:/compra/miscompras";
 	}
 }
