@@ -2,38 +2,66 @@ package com.flexsoles.persistencia;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name = "Compras")
 public class Compras implements Serializable {
 	// ATRIBUTOS
-	private long id;
-	private String nombre;
+
+	@Id
+	@Column(name = "id")
+	private long idCompra;
+
+	@Column(name = "idProducto")
+	private long idProducto;
+
+	private long idUsuario;
+
 	private int cantidad;
-	
-	//CONSTRUCTORES
-	
-	public Compras(){}
-	
-	public Compras(long id, String nombre, int cantidad) {
-		this.id = id;
-		this.nombre = nombre;
+	// CONSTRUCTORES
+
+	public Compras() {
+	}
+
+	public Compras(long idCompra, long idUsuario,long idProducto,  int cantidad) {
+		super();
+		this.idCompra = idCompra;
+		this.idProducto = idProducto;
+		this.idUsuario = idUsuario;
 		this.cantidad = cantidad;
 	}
-	
-	//GETTERS & SETTERS
-	public long getId() {
-		return id;
+
+	public long getIdCompra() {
+		return idCompra;
 	}
-	public void setId(long id) {
-		this.id = id;
+
+	public void setIdCompra(long idCompra) {
+		this.idCompra = idCompra;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public long getIdProducto() {
+		return idProducto;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setIdProducto(long idProducto) {
+		this.idProducto = idProducto;
 	}
+
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	public int getCantidad() {
 		return cantidad;
 	}
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}

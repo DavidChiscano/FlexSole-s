@@ -10,11 +10,19 @@
 </head>
 <body>
 <nav th:replace="navbar"></nav>
-<h1>Shopping Cart</h1>
+<h1>Carrito de la compra</h1>
+<form th:action="@{/compra/cesta}" method="POST">
 	   <article id="${session.id}" name="${session.nombre}" th:each="compras: ${ListaCompras}">
-	    		   	<h2 th:text="${compras.id}"></h2>
-		            <h3 th:text="${compras.nombre}"></h3>
+	    		   	<h2 th:text="${compras.idProducto}"></h2>
+		            <h3 th:text="${compras.nombreProducto}"></h3>
 		            <h3 th:text="${compras.cantidad}"></h3>
        </article>
+       <div th:if="${session.usuario == null}">
+			<a th:href="@{/usuario/login}" class="card-link">Inicia sesion para comprar</a>
+  		</div>
+  		<div th:if="${session.usuario != null}">
+			<a th:href="@{/compra/realizarCompra}" class="card-link">Finalizar compra</a>
+  		</div>
+</form>
 	</body>
 </html>
