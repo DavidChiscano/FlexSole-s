@@ -41,8 +41,6 @@ public class ComprasJDBC implements ComprasDAO {
 				c.getIdUsuario(), c.getIdProducto(), c.getCantidad());
 	}
 
-
-
 	@Override
 	public Compras crearCompra(Usuario u, Productos p) {
 		// TODO Auto-generated method stub

@@ -12,7 +12,7 @@
 <nav th:replace="navbar"></nav>
 <h1>Mis compras</h1>
 	   <article id="${session.id}" name="${session.nombre}" th:each="compras: ${ListaComprasRealizadas}">
-	    		   	<h2 th:text="${compras.idCompra}"></h2>
+	    		   	<h2 th:text="${compras.id}"></h2>
 		            <h3 th:text="${compras.idProducto}"></h3>
 		            <h3 th:text="${compras.idUsuario}"></h3>
 		            <h3 th:text="${compras.cantidad}"></h3>
