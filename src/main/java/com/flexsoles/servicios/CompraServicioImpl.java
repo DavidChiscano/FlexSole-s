@@ -1,10 +1,12 @@
 package com.flexsoles.servicios;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.flexsoles.dtos.LineaCarrito;
@@ -23,6 +25,7 @@ public class CompraServicioImpl implements ComprasServicio{
 	
 	@Autowired
 	private ProductoDAO productoModelo;
+	
 	
 	@Override
 	public Compras realizarCompra(Usuario u, List<LineaCarrito> listaCarrito) {
@@ -45,8 +48,9 @@ public class CompraServicioImpl implements ComprasServicio{
 
 	}
 
+
 	@Override
-	public List<Compras> getCompras() {
+	public List<Compras> getCompras(Long idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}

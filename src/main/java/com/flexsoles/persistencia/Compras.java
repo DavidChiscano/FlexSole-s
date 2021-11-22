@@ -66,4 +66,10 @@ public class Compras implements Serializable {
 		this.cantidad = cantidad;
 	}
 
+	@Override
+	public String toString() {
+		return "Compras [idCompra=" + idCompra + ", idProducto=" + idProducto + ", idUsuario=" + idUsuario
+				+ ", cantidad=" + cantidad + "]";
+	}
+
 }

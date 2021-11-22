@@ -20,9 +20,9 @@
        <div th:if="${session.usuario == null}">
 			<a th:href="@{/usuario/login}" class="card-link">Inicia sesion para comprar</a>
   		</div>
-  		<div th:if="${session.usuario != null}">
-			<input type="submit" value="Comprar"/>
-  		</div>
+  			<div th:each="compras: ${ListaCompras}" th:if="${compras.idProducto > 0}">
+				<input type="submit" value="Comprar"/>
+  			</div>	
 </form>
-	</body>
+</body>
 </html>	

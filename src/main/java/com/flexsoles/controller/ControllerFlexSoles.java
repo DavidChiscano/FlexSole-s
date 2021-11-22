@@ -111,10 +111,10 @@ public class ControllerFlexSoles {
 		return "/compra/cesta";
 	}
 
-	@RequestMapping(value = "/compra/miscompras", method = RequestMethod.GET)
-	public String getComprasRealizadas(Model modelo) {
-		List<Compras> ListaComprasRealizadas = comprasServicio.getCompras();
-		modelo.addAttribute("ListaComprasRealizadas", ListaComprasRealizadas);
+	@RequestMapping(value = "/compra/miscompras{id}", method = RequestMethod.GET)
+	public String getComprasRealizadas(Model modelo, @PathVariable("id") long id) {
+		List<Compras> ListaComprasRealizadas = comprasServicio.getCompras(id);
+		modelo.addAttribute("ListaComprasRealizadas", (ListaComprasRealizadas));
 		return "/compra/miscompras";
 	}
 
@@ -196,14 +196,12 @@ public class ControllerFlexSoles {
 	}
 	
 	@RequestMapping(value = "/compra/realizarCompra", method = RequestMethod.GET)
-	public String getComprasRealizadasGet(Model modelo) {
-		List<Compras> ListaComprasRealizadas = comprasServicio.getCompras();
-		modelo.addAttribute("ListaComprasRealizadas", ListaComprasRealizadas);
+	public String getComprasRealizadasGet(Model modelo) {		
 		return "/compra/miscompras";
 	}
 	
 	@RequestMapping(value = "/compra/realizarCompra", method = RequestMethod.POST)
-	public String getFinalizarCompra(HttpSession session, Model modelo) {
+	public String getFinalizarCompra(HttpSession session, Model modelo, @RequestParam long id) {
 		Usuario user = (Usuario) session.getAttribute("usuario");
 		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
 		Compras c = comprasServicio.realizarCompra(user, carrito);
@@ -216,8 +214,10 @@ public class ControllerFlexSoles {
 		
 		comprasModelo.insertarCompra(c);
 
-		if (c==null)
+		if (c==null) {
 			return "redirect:/index";
-		return "redirect:/compra/miscompras";
+		}
+		
+		return "redirect:/compra/miscompras{id}";
 	}
 }
