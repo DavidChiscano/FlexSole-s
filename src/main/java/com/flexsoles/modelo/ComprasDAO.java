@@ -13,4 +13,6 @@ public interface ComprasDAO {
 	
 	Compras crearCompra(Usuario u, Productos p);
 	int insertarCompra(Compras c);
+	long devolverCompra(long idCompra);
+
 }

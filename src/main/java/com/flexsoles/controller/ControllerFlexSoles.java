@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -33,10 +36,9 @@ public class ControllerFlexSoles {
 	private UsuarioDAO usuarioModelo;
 	@Autowired
 	private ComprasDAO comprasModelo;
-	
+
 	@Autowired
 	private ComprasServicio comprasServicio;
-	
 
 	// GET METHODS
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -113,8 +115,8 @@ public class ControllerFlexSoles {
 
 	@RequestMapping(value = "/compra/miscompras{id}", method = RequestMethod.GET)
 	public String getComprasRealizadas(Model modelo, @PathVariable("id") long id) {
-		List<Compras> ListaComprasRealizadas = comprasServicio.getCompras(id);
-		modelo.addAttribute("ListaComprasRealizadas", (ListaComprasRealizadas));
+		List<Compras> listaComprasRealizadas = comprasModelo.getCompras(id);
+		modelo.addAttribute("listaComprasRealizadas", (listaComprasRealizadas));
 		return "/compra/miscompras";
 	}
 
@@ -194,30 +196,34 @@ public class ControllerFlexSoles {
 
 		return "redirect:/compra/cesta";
 	}
-	
-	@RequestMapping(value = "/compra/realizarCompra", method = RequestMethod.GET)
-	public String getComprasRealizadasGet(Model modelo) {		
-		return "/compra/miscompras";
-	}
-	
+
 	@RequestMapping(value = "/compra/realizarCompra", method = RequestMethod.POST)
-	public String getFinalizarCompra(HttpSession session, Model modelo, @RequestParam long id) {
+	public String FinalizarCompra(HttpSession session, Model modelo) {
 		Usuario user = (Usuario) session.getAttribute("usuario");
 		List<LineaCarrito> carrito = (List<LineaCarrito>) session.getAttribute("carrito");
 		Compras c = comprasServicio.realizarCompra(user, carrito);
-		
-		for(int i=0; i<carrito.size(); i++) {
+
+		for (int i = 0; i < carrito.size(); i++) {
 			c.setIdUsuario(user.getId());
 			c.setIdProducto(carrito.get(i).getIdProducto());
 			c.setCantidad(carrito.get(i).getCantidad());
 		}
-		
+
 		comprasModelo.insertarCompra(c);
 
-		if (c==null) {
+		if (c == null) {
 			return "redirect:/index";
 		}
-		
-		return "redirect:/compra/miscompras{id}";
+
+		return "redirect:/index";
+	}
+
+	@RequestMapping(value = "/compra/devolverCompra{id}", method = RequestMethod.GET)
+	public String devolverCompra(HttpSession session, @PathVariable("id") long id, Model modelo) throws ScriptException {
+		comprasModelo.devolverCompra(id);
+		ScriptEngineManager mgr = new ScriptEngineManager();
+		ScriptEngine js = mgr.getEngineByName("JavaScript");
+
+		return "redirect:/compra/miscompras"+js.eval("document.getElementById('id')");
 	}
 }

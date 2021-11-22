@@ -12,4 +12,5 @@ public interface ComprasServicio {
 	Compras realizarCompra (Usuario u, List<LineaCarrito> listaCarrito);
 	List<Compras> getCompras(Long idUsuario);
 
+
 }
