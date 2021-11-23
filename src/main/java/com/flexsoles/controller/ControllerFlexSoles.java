@@ -219,11 +219,10 @@ public class ControllerFlexSoles {
 	}
 
 	@RequestMapping(value = "/compra/devolverCompra{id}", method = RequestMethod.GET)
-	public String devolverCompra(HttpSession session, @PathVariable("id") long id, Model modelo) throws ScriptException {
+	public String devolverCompra(HttpSession session, @PathVariable("id") long id, Model modelo){
 		comprasModelo.devolverCompra(id);
-		ScriptEngineManager mgr = new ScriptEngineManager();
-		ScriptEngine js = mgr.getEngineByName("JavaScript");
 
-		return "redirect:/compra/miscompras"+js.eval("document.getElementById('id')");
+		
+		return "redirect:/compra/miscompras";
 	}
 }

@@ -13,6 +13,9 @@
 <body>
 	<nav th:replace="navbar"></nav>
 	<h1>Mis compras</h1>
+	<div  id="${idUsuario}" th:each="usuario: ${ListaUsuarios}">
+		<input type="hidden" id="idUsuario" name="idUsuario" th:value="${session.usuario.id}">
+	</div>
 	<article id="${id}" name="${session.nombre}" th:each="compras: ${listaComprasRealizadas}">
 		<input type="hidden" id="id" name="id" th:value="${compras.idUsuario}">
 		<table>
@@ -29,7 +32,7 @@
 					<td colspan="2"> No hay compras realizadas </td>
 				</tr>
 				<tr>
-				<td><span th:text="${compras.idCompra}"> idUsuario </span></td>
+					<td><span th:text="${compras.idCompra}"> idUsuario </span></td>
 					<td><span th:text="${compras.idUsuario}"> idUsuario </span></td>
 					<td><span th:text="${compras.idProducto}"> idProducto </span></td>
 					<td><span th:text="${compras.cantidad}">unidades</span></td>
