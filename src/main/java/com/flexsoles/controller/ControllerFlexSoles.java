@@ -221,8 +221,6 @@ public class ControllerFlexSoles {
 	@RequestMapping(value = "/compra/devolverCompra{id}", method = RequestMethod.GET)
 	public String devolverCompra(HttpSession session, @PathVariable("id") long id, Model modelo){
 		comprasModelo.devolverCompra(id);
-
-		
-		return "redirect:/compra/miscompras";
+		return "redirect:/index";
 	}
 }
