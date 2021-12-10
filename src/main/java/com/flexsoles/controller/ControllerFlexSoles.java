@@ -1,16 +1,16 @@
 package com.flexsoles.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +24,7 @@ import com.flexsoles.modelo.ProductoDAO;
 import com.flexsoles.modelo.UsuarioDAO;
 import com.flexsoles.persistencia.Compras;
 import com.flexsoles.persistencia.Productos;
+import com.flexsoles.persistencia.Rol;
 import com.flexsoles.persistencia.Usuario;
 import com.flexsoles.servicios.ComprasServicio;
 
@@ -37,6 +38,8 @@ public class ControllerFlexSoles {
 	@Autowired
 	private ComprasDAO comprasModelo;
 
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	private ComprasServicio comprasServicio;
 
@@ -119,6 +122,7 @@ public class ControllerFlexSoles {
 		modelo.addAttribute("listaComprasRealizadas", (listaComprasRealizadas));
 		return "/compra/miscompras";
 	}
+	
 
 	// POST METHODS
 	@RequestMapping(value = "/producto/crear", method = RequestMethod.POST)
@@ -135,14 +139,21 @@ public class ControllerFlexSoles {
 	}
 
 	@RequestMapping(value = "/usuario/signup", method = RequestMethod.POST)
-	public String CrearUsuario(@RequestParam String nombre, String apellidos, String email, String passwd,
+	public String CrearUsuario(@RequestParam String nombre, String apellidos, String rol, String email, String passwd,
 			String fechaNacimiento, HttpServletRequest request, Model modelo) {
 		Usuario usuario = new Usuario();
-		usuario = new Usuario(0, null, null, null, null, null);
+
+		Rol r = new Rol();
+		r.addUsuario(usuario);
+		
+		usuario = new Usuario(0, null, null, null, null, null, null);
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
+		usuario.anadirRol(r);
+		usuario.setRol(rol);
 		usuario.setEmail(email);
-		usuario.setPasswd(passwd);
+		usuario.setPasswd(bCryptPasswordEncoder.encode(passwd));
+		//usuario.setPasswd(passwd);
 		usuario.setFechaNacimiento(fechaNacimiento);
 		usuarioModelo.crearUsuario(usuario);
 		return "redirect:/usuario/login";
@@ -219,7 +230,7 @@ public class ControllerFlexSoles {
 	}
 
 	@RequestMapping(value = "/compra/devolverCompra{id}", method = RequestMethod.GET)
-	public String devolverCompra(HttpSession session, @PathVariable("id") long id, Model modelo){
+	public String devolverCompra(@PathVariable("id") long id, Model modelo){
 		comprasModelo.devolverCompra(id);
 		return "redirect:/index";
 	}

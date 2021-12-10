@@ -14,36 +14,7 @@ public class ProductoJDBC implements ProductoDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	@Override
-	public String setTitulo(Productos p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public String setDescripcion(Productos p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long setId(Productos p) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double setPrecio(Productos p) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setDescuento(Productos p) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Productos> get8Productos() {

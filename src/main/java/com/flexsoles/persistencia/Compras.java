@@ -7,15 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "Compras")
 public class Compras implements Serializable {
 	// ATRIBUTOS
 
-	@Id
-	@Column(name = "id")
 	private long idCompra;
 
-	@Column(name = "idProducto")
 	private long idProducto;
 
 	private long idUsuario;

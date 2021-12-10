@@ -6,24 +6,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "Productos")
 public class Productos implements Serializable {
 	
 	// ATRIBUTOS
-	@Column(name = "titulo")
 	private String titulo;
 	
-	@Column(name = "descripcion")
 	private String descripcion;
 	
-	@Id
-	@Column(name = "id")
 	private long id;
 	
-	@Column(name = "precio")
 	private double precio;
 	
-	@Column(name = "descuento")
 	private int descuento;
 
 	
