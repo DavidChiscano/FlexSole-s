@@ -31,12 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/img/**",
 	                            "/signup",
 	                            "/usuario/signup",
+	                            "/producto/producto{id}",
 	                            "/webjars/**").permitAll()
 	                    .antMatchers("/admin/**").hasAuthority("admin")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
-	                    .loginPage("/login")
+	                    .loginPage("/usuario/login")
 	                    .loginProcessingUrl("/usuario/login")
 	                    .usernameParameter("nombre")
 	                    .passwordParameter("passwd")
