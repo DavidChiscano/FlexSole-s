@@ -20,16 +20,11 @@ import com.flexsoles.servicios.ComprasServicio;
 
 @Controller
 public class CompraController {
-	
-	
-	
+
 	@Autowired
 	private ComprasDAO comprasModelo;
 	@Autowired
 	private ComprasServicio comprasServicio;
-	
-	
-	
 	
 	
 	// GET METHODS
@@ -50,13 +45,7 @@ public class CompraController {
 		comprasModelo.devolverCompra(id);
 		return "redirect:/index";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	// POST METHODS
 	@RequestMapping(value = "/compra/cesta", method = RequestMethod.POST)
 	public String getCesta(Model modelo, HttpSession session, @RequestParam long id, @RequestParam String nombre,

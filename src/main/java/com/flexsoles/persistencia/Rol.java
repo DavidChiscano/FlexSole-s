@@ -1,20 +1,12 @@
 package com.flexsoles.persistencia;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-public class Rol{
+public class Rol implements Serializable{
 	private long id;
 	private String nombre_rol;
-	
-	private Set<Usuario> usuarios;
+
 
 	public long getId() {
 		return id;
@@ -32,33 +24,29 @@ public class Rol{
 		this.nombre_rol = nombre_rol;
 	}
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-	
-	public void addUsuario(Usuario usuario) {
-		this.usuarios.add(usuario);
-		usuario.getRoles().add(this);
-	}
-	
-	public void borrarUsuario(Usuario usuario) {
-		this.usuarios.remove(usuario) ;
-	}
-	public Rol(long id, String nombre_rol, Set<Usuario> usuarios) {
+	public Rol(long id, String nombre_rol) {
 		super();
 		this.id = id;
 		this.nombre_rol = nombre_rol;
-		this.usuarios = usuarios;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rol other = (Rol) obj;
+		return id == other.id;
 	}
 
 	public Rol() {
 		// TODO Auto-generated constructor stub
-	}
-
-	
-	
+	}	
 }

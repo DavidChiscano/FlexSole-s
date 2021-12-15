@@ -1,6 +1,7 @@
 package com.flexsoles.servicios;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -24,6 +25,14 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
 		Usuario usuario = usuarioDao.getUsuarios(nombre);
+		
+		List<Rol> l = usuarioDao.findUserRoles(usuario.getId());
+		HashSet<Rol> roles = new HashSet<>();
+		
+		l.stream().forEach(roles::add);
+		
+		usuario.setRoles(roles);
+		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		for (Rol rol : usuario.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(rol.getNombre_rol()));
@@ -31,4 +40,5 @@ public class CustomUserDetailsService implements UserDetailsService{
 		return new org.springframework.security.core.userdetails.User(usuario.getNombre(), usuario.getPasswd(),
 				grantedAuthorities);
 	}
+
 }

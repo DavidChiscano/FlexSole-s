@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.flexsoles.persistencia.Rol;
 import com.flexsoles.persistencia.Usuario;
 
 @Repository
@@ -14,10 +15,11 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	
 	@Override
 	public List<Usuario> getUsuarios() {
 		return jdbcTemplate.query("select * from UsuariosSecurity",
-				(rs, rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("rol"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")));
+				(rs, rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")));
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public Usuario iniciarSesion(String nombre, String passwd) {
 		return  jdbcTemplate.queryForObject("select * from UsuariosSecurity where nombre like ? AND passwd like ?", (rs,
-				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"), rs.getString("rol"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), nombre, passwd);
+				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"), rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), nombre, passwd);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -42,8 +44,19 @@ public class UsuarioJDBC implements UsuarioDAO {
 	@Override
 	public Usuario getUsuarios(String nombre) {
 		return  jdbcTemplate.queryForObject("select * from UsuariosSecurity where nombre like ?", (rs,
-				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"), rs.getString("rol"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), "%"+nombre+"%");
+				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), "%"+nombre+"%");
 	}
 
+	@Override
+	public List<Rol> findUserRoles(long id) {
+		return jdbcTemplate.query("select r.id as 'id', r.nombre_rol as 'nombre' "
+				+ "from Roles r inner join UsuarioRol ur on r.id = ur.id "
+				+ "where ur.idUsuario = ?", (rs, rowNum) -> new Rol(rs.getLong("id"), rs.getString("nombre")), id);
+	}
+	@Override
+	public int saveRol(long idRol, long idUsuario) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.update("insert into UsuarioRol(id, idUsuario) value (?,?)", idRol, idUsuario);
+	}
 
 }

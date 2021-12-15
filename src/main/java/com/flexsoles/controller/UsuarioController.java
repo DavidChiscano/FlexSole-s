@@ -63,15 +63,9 @@ public class UsuarioController {
 	public String CrearUsuario(@RequestParam String nombre, String apellidos, String rol, String email, String passwd,
 			String fechaNacimiento, HttpServletRequest request, Model modelo) {
 		Usuario usuario = new Usuario();
-
-		Rol r = new Rol();
-		r.addUsuario(usuario);
-		
 		usuario = new Usuario(0, null, null, null, null, null, null);
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
-		usuario.anadirRol(r);
-		usuario.setRol(rol);
 		usuario.setEmail(email);
 		usuario.setPasswd(bCryptPasswordEncoder.encode(passwd));
 		//usuario.setPasswd(passwd);

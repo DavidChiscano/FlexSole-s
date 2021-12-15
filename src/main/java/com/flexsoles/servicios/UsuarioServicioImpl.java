@@ -3,6 +3,7 @@ package com.flexsoles.servicios;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +18,8 @@ public class UsuarioServicioImpl implements UsuarioServicio,UserDetailsService {
 
 //	@Autowired
 //	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private UsuarioDAO UsuarioDAO;
 	
@@ -36,9 +38,9 @@ public class UsuarioServicioImpl implements UsuarioServicio,UserDetailsService {
 	}
 
 	@Override
-	public Usuario buscarPorNombreUsuario(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario buscarPorNombreUsuario(String nombre) {
+		return  jdbcTemplate.queryForObject("select * from UsuariosSecurity where nombre like ?", (rs,
+				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), "%"+nombre+"%");
 	}
 
 }

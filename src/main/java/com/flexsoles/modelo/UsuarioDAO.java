@@ -3,6 +3,7 @@ package com.flexsoles.modelo;
 import java.util.List;
 import java.util.Optional;
 
+import com.flexsoles.persistencia.Rol;
 import com.flexsoles.persistencia.Usuario;
 
 public interface UsuarioDAO {
@@ -12,5 +13,8 @@ public interface UsuarioDAO {
 	Optional<Usuario> buscarId(long id);
 	List <Usuario> getUsuarios();
 	Usuario getUsuarios(String nombre);
+	List<Rol> findUserRoles(long id);
+
+	int saveRol(long idRol, long idUsuario);
 
 }

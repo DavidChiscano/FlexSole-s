@@ -32,15 +32,25 @@ public class Usuario implements Serializable{
 		
 		private String fechaNacimiento;
 		
-
+		private HashSet<Rol> roles;
+		
 		//CONSTRUCTORES
 		public Usuario(){}
-	
-		public Usuario(long id, String nombre, String apellidos, String rol, String email, String passwd, String fechaNacimiento ) {
+		
+		public Usuario(long id, String nombre, String apellidos, String email, String passwd, String fechaNacimiento ) {
 			this.id = id;
 			this.nombre = nombre;
 			this.apellidos = apellidos;
-			this.setRol(rol);
+			this.email = email;
+			this.passwd = passwd;
+			this.fechaNacimiento = fechaNacimiento;
+		}
+		
+		public Usuario(long id, String nombre, String apellidos, HashSet<Rol> roles, String email, String passwd, String fechaNacimiento ) {
+			this.id = id;
+			this.nombre = nombre;
+			this.apellidos = apellidos;
+			this.roles = roles;
 			this.email = email;
 			this.passwd = passwd;
 			this.fechaNacimiento = fechaNacimiento;
@@ -56,22 +66,11 @@ public class Usuario implements Serializable{
 			this.nombre = nombre;
 			this.passwd = passwd;
 		}
-		private Set<Rol> roles = new HashSet<>();
 		
-		public boolean anadirRol(Rol rol) {
-		    rol.addUsuario(this);
-			return getRoles().add(rol);
-		}
+		
+
 		
 		//GETTERS & SETTERS
-		public Set<Rol> getRoles() {
-			return roles;
-		}
-
-		public void setRoles(Set<Rol> roles) {
-			this.roles = roles;
-		}
-		
 		public long getId() {
 			return id;
 		}
@@ -121,12 +120,11 @@ public class Usuario implements Serializable{
 			this.fechaNacimiento = fechaNacimiento;
 		}
 
-		public String getRol() {
-			return rol;
+		public HashSet<Rol> getRoles() {
+			return roles;
 		}
-
-		public void setRol(String rol) {
-			this.rol = rol;
+		public void setRoles(HashSet<Rol> roles) {
+			this.roles = roles;
 		}
 }
 

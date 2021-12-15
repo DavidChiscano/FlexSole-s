@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.flexsoles.servicios.CustomUserDetailsService;
 import com.flexsoles.servicios.UsuarioServicio;
 
 @Configuration
@@ -19,7 +20,7 @@ import com.flexsoles.servicios.UsuarioServicio;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
-	private UsuarioServicio usuarioServicio;
+	private CustomUserDetailsService customUserDetailsService;
 	@Override
 		protected void configure(HttpSecurity http) throws Exception {
 	        http
@@ -33,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                            "/usuario/signup",
 	                            "/producto/producto{id}",
 	                            "/webjars/**").permitAll()
-	                    .antMatchers("/admin/**").hasAuthority("admin")
+	                    .antMatchers("/producto/crear").hasAuthority("ADMIN")
+	                    .antMatchers("/producto/borrar/{id}").hasAuthority("ADMIN")
 	                    .anyRequest().authenticated()
 	                .and()
 	                .formLogin()
@@ -58,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    @Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
 	 
-	        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());     
+	        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());     
 	    }
 	    
 		@Bean
