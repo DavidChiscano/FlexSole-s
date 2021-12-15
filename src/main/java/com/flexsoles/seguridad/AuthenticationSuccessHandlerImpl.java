@@ -38,9 +38,6 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		session.setAttribute("usuario.nombre", authUser.getNombre());
 		session.setAttribute("usuario.id", authUser.getId());
 
-
-		
-
 		boolean isUsuario = false;
 		boolean isAdmin = false;
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
