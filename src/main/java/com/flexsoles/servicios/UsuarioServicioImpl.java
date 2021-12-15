@@ -40,7 +40,7 @@ public class UsuarioServicioImpl implements UsuarioServicio,UserDetailsService {
 	@Override
 	public Usuario buscarPorNombreUsuario(String nombre) {
 		return  jdbcTemplate.queryForObject("select * from UsuariosSecurity where nombre like ?", (rs,
-				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), "%"+nombre+"%");
+				rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"),rs.getString("apellidos"),rs.getString("rol"),rs.getString("email"), rs.getString("passwd"), rs.getString("fechaNacimiento")), "%"+nombre+"%");
 	}
 
 }

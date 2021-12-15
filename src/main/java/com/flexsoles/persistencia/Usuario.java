@@ -55,6 +55,15 @@ public class Usuario implements Serializable{
 			this.passwd = passwd;
 			this.fechaNacimiento = fechaNacimiento;
 		}
+		public Usuario(long id, String nombre, String apellidos, String rol, String email, String passwd, String fechaNacimiento ) {
+			this.id = id;
+			this.nombre = nombre;
+			this.apellidos = apellidos;
+			this.rol = rol;
+			this.email = email;
+			this.passwd = passwd;
+			this.fechaNacimiento = fechaNacimiento;
+		}
 		public Usuario(long id, String nombre, String apellidos, String email, String fechaNacimiento ) {
 			this.id = id;
 			this.nombre = nombre;
@@ -68,8 +77,18 @@ public class Usuario implements Serializable{
 		}
 		
 		
+		public String getRol() {
+			return rol;
+		}
 
+		public void setRol(String rol) {
+			this.rol = rol;
+		}
 		
+		public Usuario(long id) {
+			this.id = id;
+		}
+
 		//GETTERS & SETTERS
 		public long getId() {
 			return id;

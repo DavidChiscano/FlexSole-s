@@ -1,5 +1,6 @@
 package com.flexsoles.controller;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,17 +61,23 @@ public class UsuarioController {
 	
 	//POST METHODS
 	@RequestMapping(value = "/usuario/signup", method = RequestMethod.POST)
-	public String CrearUsuario(@RequestParam String nombre, String apellidos, String rol, String email, String passwd,
+	public String CrearUsuario(@RequestParam String nombre, String apellidos, HashSet<Rol> roles, String email, String passwd,
 			String fechaNacimiento, HttpServletRequest request, Model modelo) {
 		Usuario usuario = new Usuario();
-		usuario = new Usuario(0, null, null, null, null, null, null);
+
+
 		usuario.setNombre(nombre);
 		usuario.setApellidos(apellidos);
+		usuario.setRoles(roles);
 		usuario.setEmail(email);
 		usuario.setPasswd(bCryptPasswordEncoder.encode(passwd));
-		//usuario.setPasswd(passwd);
 		usuario.setFechaNacimiento(fechaNacimiento);
 		usuarioModelo.crearUsuario(usuario);
+		
+		long temp = usuarioModelo.getId(usuario.getNombre());
+		usuarioModelo.saveTablaRoles(temp, "USER");
+		usuarioModelo.saveRol(temp, temp);
+		
 		return "redirect:/usuario/login";
 	}
 

@@ -37,6 +37,8 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		session.setAttribute("usuario", authUser);
 		session.setAttribute("usuario.nombre", authUser.getNombre());
 		session.setAttribute("usuario.id", authUser.getId());
+
+
 		
 
 		boolean isUsuario = false;
@@ -45,10 +47,11 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		for (final GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("USER")) {
 				isUsuario = true;
+				session.setAttribute("usuario.rol", grantedAuthority.getAuthority().equals("USER"));
 				break;
 			} else if (grantedAuthority.getAuthority().equals("ADMIN")) {
 				isAdmin = true;
-				session.setAttribute("usuario.rol", authUser.getNombre());
+				session.setAttribute("usuario.rol", grantedAuthority.getAuthority().equals("ADMIN"));
 				break;
 			}
 		}
